@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "oglwidget.h"
+#include "controller/controller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,10 +19,13 @@ class MainWindow : public QMainWindow {
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
-  OGLWidget *oglwidget;
+ private slots:
+  void on_button_selectFile_clicked();
 
  private:
   Ui::MainWindow *ui;
+  OGLWidget *oglwidget;
+  s21::Controller *controller;
 
 };
 #endif  // MAINWINDOW_H
