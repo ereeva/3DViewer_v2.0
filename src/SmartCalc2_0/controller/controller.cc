@@ -1,4 +1,5 @@
 #include "controller.h"
+
 namespace s21 {
 void Controller::LoadObject(std::string &file_name) {
   try {

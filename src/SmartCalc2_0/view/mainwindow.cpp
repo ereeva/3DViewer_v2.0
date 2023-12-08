@@ -23,18 +23,26 @@ void MainWindow::on_button_selectFile_clicked() {
                                                    QDir::homePath(), tr(""));
 //  ui->label_fileName->setText("  " + fileName);
 
+
 //  потом убрать в отдельный метод
   std::string str = fileName.toStdString();
-  controller->LoadObject(str);
+//    std::string str = "";
+  try {
+    controller->LoadObject(str);
+      if (!controller->Status()) {
+        ui->label_fileName->setText("  " + fileName);
 
-//  if (!controller->Status()) {
-//    ui->label_fileName->setText("  " + fileName);
-////    size_t edgesCount = controller->FaceIndCount();
-////    ui->label_edgesCount->setText(QString::number(edgesCount));
-////    size_t verticesCount = controller->VertexCount();
-////    ui->label_verticesCount->setText(QString::number(verticesCount));
-//  } else {
-//    ui->label_fileName->setText("error file");
-//  }
+        size_t edgesCount = controller->FaceIndCount();
+        ui->label_edgesCount->setText(QString::number(edgesCount));
+
+        size_t verticesCount = controller->VertexCount();
+        ui->label_verticesCount->setText(QString::number(verticesCount));
+      } else {
+        ui->label_fileName->setText("error file");
+      }
+  } catch (...) {
+    ui->label_fileName->setText("error path");
+  }
+
 }
 
