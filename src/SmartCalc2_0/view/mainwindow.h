@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "oglwidget.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -16,7 +18,7 @@ class MainWindow : public QMainWindow {
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
- private slots:
+  OGLWidget *oglwidget;
 
  private:
   Ui::MainWindow *ui;

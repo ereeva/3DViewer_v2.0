@@ -15,9 +15,11 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     view/mainwindow.cpp \
+    view/oglwidget.cpp
 
 HEADERS += \
     view/mainwindow.h \
+    view/oglwidget.h
 
 FORMS += \
     view/mainwindow.ui

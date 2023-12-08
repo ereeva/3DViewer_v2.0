@@ -672,7 +672,7 @@ color: white
      <string>Background</string>
     </property>
    </widget>
-   <widget class="QWidget" name="widget" native="true">
+   <widget class="OGLWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -1283,6 +1283,14 @@ QPushButton:pressed {
    </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>OGLWidget</class>
+   <extends>QWidget</extends>
+   <header>view/oglwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
