@@ -21,18 +21,18 @@ MainWindow::~MainWindow() {
 void MainWindow::on_button_selectFile_clicked() {
   QString fileName = QFileDialog::getOpenFileName(this, tr("Select a file"),
                                                    QDir::homePath(), tr(""));
-  ui->label_fileName->setText("  " + fileName);
+//  ui->label_fileName->setText("  " + fileName);
 
 //  потом убрать в отдельный метод
   std::string str = fileName.toStdString();
-  //controller->LoadObject(str);
+  controller->LoadObject(str);
 
 //  if (!controller->Status()) {
 //    ui->label_fileName->setText("  " + fileName);
-//    size_t edgesCount = controller->FaceIndCount();
-//    ui->label_edgesCount->setText(QString::number(edgesCount));
-//    size_t verticesCount = controller->VertexCount();
-//    ui->label_verticesCount->setText(QString::number(verticesCount));
+////    size_t edgesCount = controller->FaceIndCount();
+////    ui->label_edgesCount->setText(QString::number(edgesCount));
+////    size_t verticesCount = controller->VertexCount();
+////    ui->label_verticesCount->setText(QString::number(verticesCount));
 //  } else {
 //    ui->label_fileName->setText("error file");
 //  }
