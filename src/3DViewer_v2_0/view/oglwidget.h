@@ -20,6 +20,13 @@ class OGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
 
  public slots:
   void allocate(s21::Controller *&controller);
+  void translateObject(double x, double y, double z);
+
+  void rotateObjectX(double x);
+  void rotateObjectY(double y);
+  void rotateObjectZ(double z);
+
+  void scaleObject(double x);
 
  private:
   s21::Controller *data_ = nullptr;

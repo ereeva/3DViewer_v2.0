@@ -30,6 +30,15 @@ void Object::Rotate(double x, Axis axis) {
   }
 }
 
+void Object::RotateX(double angle) {
+  for (size_t i = 0; i < vertices_.size(); i += 3) {
+    double temp_y = vertices_[i + 1 % 3];
+    double temp_z = vertices_[i + 2 % 3];
+    vertices_[i + (0 + 1) % 3] = cos(angle) * temp_y + sin(angle) * temp_z;
+    vertices_[i + (0 + 2) % 3] = sin(angle) * -temp_y + cos(angle) * temp_z;
+  }
+}
+
 void Object::Scale(double x) {
   if (x != 0)
     for (size_t i = 0; i < vertices_.size(); ++i) vertices_[i] *= x;

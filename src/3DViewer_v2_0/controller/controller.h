@@ -19,6 +19,9 @@ class Controller {
 
   void TranslateObject(double x, Axis a);
   void RotateObject(double x, Axis a);
+  void RotateObjectX(double angle) {
+    obj_->RotateX(angle);
+  }
   void ScaleObject(double x);
 
  private:

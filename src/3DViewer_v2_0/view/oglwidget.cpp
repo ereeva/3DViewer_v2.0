@@ -28,3 +28,31 @@ void OGLWidget::allocate(s21::Controller *&controller) {
   data_ = controller;
   update();
 }
+
+void OGLWidget::translateObject(double x, double y, double z) {
+  data_->TranslateObject(x, s21::X);
+  data_->TranslateObject(y, s21::Y);
+  data_->TranslateObject(z, s21::Z);
+
+  update();
+}
+
+void OGLWidget::rotateObjectX(double x) {
+  data_->RotateObjectX(x);
+  update();
+}
+
+void OGLWidget::rotateObjectY(double y) {
+  data_->RotateObject(y, s21::Y);
+  update();
+}
+
+void OGLWidget::rotateObjectZ(double z) {
+  data_->RotateObject(z, s21::Z);
+  update();
+}
+
+void OGLWidget::scaleObject(double x) {
+  data_->ScaleObject(x);
+  update();
+}
