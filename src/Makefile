@@ -1,4 +1,4 @@
-PROJECT_NAME := SmartCalc2_0
+PROJECT_NAME := 3DViewer_v2_0
 BUILD_DIR := build
 OS := $(shell uname -s)
 CC=qmake

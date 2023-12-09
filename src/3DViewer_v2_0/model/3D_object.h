@@ -10,6 +10,7 @@ enum Axis { X, Y, Z };
 
 class Object {
  public:
+  Object() = default;
   Object(std::vector<double> &v, std::vector<int> &f) ;
   ~Object() = default;
 

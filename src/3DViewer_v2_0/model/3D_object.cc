@@ -7,8 +7,8 @@
 namespace s21 {
 
 Object::Object(std::vector<double> &v, std::vector<int> &f) {
-  std::swap(v, vertices_);
-  std::swap(f, face_indices_);
+  v.swap(vertices_);
+  f.swap(face_indices_);
 }
 
 const std::vector<double> &Object::Vertices() const { return vertices_; }
@@ -31,7 +31,8 @@ void Object::Rotate(double x, Axis axis) {
 }
 
 void Object::Scale(double x) {
-  for (size_t i = 0; i < vertices_.size(); ++i) vertices_[i] *= x;
+  if (x != 0)
+    for (size_t i = 0; i < vertices_.size(); ++i) vertices_[i] *= x;
 }
 
 }  // namespace s21

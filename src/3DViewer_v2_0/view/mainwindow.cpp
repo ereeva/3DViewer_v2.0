@@ -10,12 +10,12 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), oglwidget(new OGLWidget), controller(new s21::Controller) {
   ui->setupUi(this);
-  ui->widget->allocate();
 }
 
 MainWindow::~MainWindow() {
   delete ui;
   delete oglwidget;
+  delete controller;
 }
 
 void MainWindow::on_button_selectFile_clicked() {
@@ -23,26 +23,22 @@ void MainWindow::on_button_selectFile_clicked() {
                                                    QDir::homePath(), tr(""));
 //  ui->label_fileName->setText("  " + fileName);
 
-
 //  потом убрать в отдельный метод
   std::string str = fileName.toStdString();
-//    std::string str = "";
+//  std::string str = "obj/cat.obj";
   try {
     controller->LoadObject(str);
-      if (!controller->Status()) {
-        ui->label_fileName->setText("  " + fileName);
+    ui->label_fileName->setText("  " + fileName);
 
-        size_t edgesCount = controller->FaceIndCount();
-        ui->label_edgesCount->setText(QString::number(edgesCount));
+    size_t edgesCount = controller->FaceIndCount();
+    ui->label_edgesCount->setText(QString::number(edgesCount));
 
-        size_t verticesCount = controller->VertexCount();
-        ui->label_verticesCount->setText(QString::number(verticesCount));
-      } else {
-        ui->label_fileName->setText("error file");
-      }
+    size_t verticesCount = controller->VertexCount();
+    ui->label_verticesCount->setText(QString::number(verticesCount));
+
+    ui->widget->allocate(controller);
   } catch (...) {
     ui->label_fileName->setText("error path");
   }
 
 }
-

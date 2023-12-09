@@ -6,6 +6,8 @@
 #include <QOpenGLWidget>
 //#include <QtOpenGLWidgets>
 
+#include "../controller/controller.h"
+
 class OGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
   Q_OBJECT
  public:
@@ -17,7 +19,10 @@ class OGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
   void resizeGL(int w, int h) override;
 
  public slots:
-  void allocate();
+  void allocate(s21::Controller *&controller);
+
+ private:
+  s21::Controller *data_ = nullptr;
 };
 
 #endif  // OGLWIDGET_H

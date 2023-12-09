@@ -7,7 +7,7 @@
 namespace s21 {
 class Controller {
  public:
-  Controller() : parser_(std::make_unique<Parser>()) {}
+  Controller() = default;
   ~Controller() = default;
 
   void LoadObject(std::string &file_name);
@@ -20,11 +20,10 @@ class Controller {
   void TranslateObject(double x, Axis a);
   void RotateObject(double x, Axis a);
   void ScaleObject(double x);
-  bool Status() const;
 
  private:
-  std::unique_ptr<Object> obj_;
-  std::unique_ptr<Parser> parser_;
+  std::unique_ptr<Object> obj_{std::make_unique<Object>()};
+  std::unique_ptr<Parser> parser_{std::make_unique<Parser>()};
 };
 }  // namespace s21
 

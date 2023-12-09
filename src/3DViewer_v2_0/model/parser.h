@@ -18,10 +18,10 @@ class Parser {
   std::unique_ptr<Object> Parse(const std::string &file_name);
 
  private:
-  std::vector<double> v_;
-  std::vector<int> f_;
-  std::array<double,3> min_;
-  std::array<double,3> max_;
+  std::vector<double> v_{};
+  std::vector<int> f_{};
+  std::array<double, 3> min_{};
+  std::array<double, 3> max_{};
 
   void ParseVertice(std::string &line);
   void ParseFace(std::string &line);
