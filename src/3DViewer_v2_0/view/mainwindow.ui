@@ -827,34 +827,6 @@ color: white
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QSlider" name="Slider_background">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>870</y>
-      <width>91</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="minimum">
-     <number>1</number>
-    </property>
-    <property name="maximum">
-     <number>255</number>
-    </property>
-    <property name="value">
-     <number>1</number>
-    </property>
-    <property name="sliderPosition">
-     <number>1</number>
-    </property>
-    <property name="tracking">
-     <bool>true</bool>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
    <widget class="QLabel" name="text_projection_2">
     <property name="geometry">
      <rect>
@@ -1164,31 +1136,6 @@ color: white
     </property>
     <property name="text">
      <string>Point size</string>
-    </property>
-   </widget>
-   <widget class="QSlider" name="Slider_pointColor">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>840</y>
-      <width>111</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="minimum">
-     <number>1</number>
-    </property>
-    <property name="maximum">
-     <number>255</number>
-    </property>
-    <property name="value">
-     <number>1</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
     </property>
    </widget>
    <widget class="QPushButton" name="button_JPG_2">

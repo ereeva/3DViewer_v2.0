@@ -2,7 +2,8 @@
 
 #include <QOpenGLFunctions>
 #include <QOpenGLWidget>
-
+#include <QColor>
+#include <QColorDialog>
 #include <QFileDialog>
 
 #include "ui_mainwindow.h"
@@ -10,6 +11,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), oglwidget(new OGLWidget), controller(new s21::Controller) {
   ui->setupUi(this);
+  settings_.setValue("background", "red");
 }
 
 MainWindow::~MainWindow() {
@@ -22,6 +24,9 @@ void MainWindow::on_button_selectFile_clicked() {
   QString fileName = QFileDialog::getOpenFileName(this, tr("Select a file"),
                                                    QDir::homePath(), tr(""));
 //  ui->label_fileName->setText("  " + fileName);
+  // костыль для очистки предыдущей модели
+  delete controller;
+  controller = new s21::Controller;
 
 //  потом убрать в отдельный метод
   std::string str = fileName.toStdString();
@@ -155,3 +160,75 @@ void MainWindow::on_spinBox_rotateZ_valueChanged(int arg1) {
 //
 // End transformations
 //
+
+//
+// Start styles
+//
+
+void MainWindow::on_radioButton_solid_clicked() {
+  ui->widget->lineType = false;
+  ui->widget->update();
+}
+
+void MainWindow::on_radioButton_dashed_clicked() {
+  ui->widget->lineType = true;
+  ui->widget->update();
+}
+
+void MainWindow::on_Slider_lineSize_valueChanged(int value) {
+  ui->widget->lineSize = (float)value;
+  ui->widget->update();
+}
+
+void MainWindow::on_radioButton_clicked() {
+  ui->widget->perspective = false;
+  ui->widget->update();
+}
+
+void MainWindow::on_radioButton_central_clicked() {
+  ui->widget->perspective = true;
+  ui->widget->update();
+}
+
+void MainWindow::on_Slider_pointSize_valueChanged(int value) {
+  ui->widget->pointSize = (float)value;
+  ui->widget->update();
+}
+
+void MainWindow::on_radioButton_none_clicked() {
+  ui->widget->pointType = 0;
+  ui->widget->update();
+}
+
+void MainWindow::on_radioButton_circle_clicked() {
+  ui->widget->pointType = 1;
+  ui->widget->update();
+}
+
+void MainWindow::on_radioButton_sqare_clicked() {
+  ui->widget->pointType = 2;
+  ui->widget->update();
+}
+
+void MainWindow::on_button_JPG_2_clicked() {
+  QColor color = QColorDialog::getColor(Qt::white, this, "Choose color");
+  ui->widget->lineColor = color;
+  ui->widget->update();
+}
+
+void MainWindow::on_button_JPG_3_clicked() {
+  QColor color = QColorDialog::getColor(Qt::white, this, "Choose color");
+  ui->widget->backgroundColor = color;
+  ui->widget->update();
+}
+
+void MainWindow::on_button_JPG_4_clicked() {
+  QColor color = QColorDialog::getColor(Qt::white, this, "Choose color");
+  ui->widget->pointColor = color;
+  ui->widget->update();
+}
+//
+// End styles
+//
+
+
