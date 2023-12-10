@@ -14,16 +14,15 @@ CONFIG += c++17
 
 SOURCES += \
     controller/controller.cc \
-    controller/settings.cc \
     main.cpp \
     model/3D_object.cc \
     model/parser.cc \
     view/mainwindow.cpp \
-    view/oglwidget.cpp
+    view/oglwidget.cpp \
+    view/settings.cc
 
 HEADERS += \
     controller/controller.h \
-    controller/settings.h \
     model/3D_object.h \
     model/parser.h \
     view/mainwindow.h \

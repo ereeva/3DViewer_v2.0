@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QSettings>
 
+#include "ui_mainwindow.h"
 #include "oglwidget.h"
 #include "controller/controller.h"
 
@@ -80,7 +81,7 @@ class MainWindow : public QMainWindow {
   OGLWidget *oglwidget;
   s21::Controller *controller;
 
-  QSettings settings_;
+  QSettings *settings_;
 
   int FPS = 100;
   double posX = 0.0;
@@ -90,6 +91,9 @@ class MainWindow : public QMainWindow {
   double rotX = 0.0;
   double rotY = 0.0;
   double rotZ = 0.0;
+
+  void SaveSettings();
+  void RestoreSettings(); 
 
 };
 #endif  // MAINWINDOW_H

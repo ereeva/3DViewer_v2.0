@@ -1,20 +1,27 @@
 #include "mainwindow.h"
 
-#include <QOpenGLFunctions>
-#include <QOpenGLWidget>
 #include <QColor>
 #include <QColorDialog>
 #include <QFileDialog>
+#include <QOpenGLFunctions>
+#include <QOpenGLWidget>
+#include <QSettings>
 
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow), oglwidget(new OGLWidget), controller(new s21::Controller) {
+    : QMainWindow(parent),
+      ui(new Ui::MainWindow),
+      oglwidget(new OGLWidget),
+      controller(new s21::Controller),
+      settings_(new QSettings("3DViewer", "")) {
   ui->setupUi(this);
-  settings_.setValue("background", "red");
+  RestoreSettings();
 }
 
 MainWindow::~MainWindow() {
+  SaveSettings();
+  delete settings_;
   delete ui;
   delete oglwidget;
   delete controller;
@@ -22,15 +29,15 @@ MainWindow::~MainWindow() {
 
 void MainWindow::on_button_selectFile_clicked() {
   QString fileName = QFileDialog::getOpenFileName(this, tr("Select a file"),
-                                                   QDir::homePath(), tr(""));
-//  ui->label_fileName->setText("  " + fileName);
+                                                  QDir::homePath(), tr(""));
+  //  ui->label_fileName->setText("  " + fileName);
   // костыль для очистки предыдущей модели
-  delete controller;
-  controller = new s21::Controller;
+  // delete controller;
+  // controller = new s21::Controller;
 
-//  потом убрать в отдельный метод
+  //  потом убрать в отдельный метод
   std::string str = fileName.toStdString();
-//  std::string str = "obj/cat.obj";
+  //  std::string str = "obj/cat.obj";
   try {
     controller->LoadObject(str);
     ui->label_fileName->setText("  " + fileName);
@@ -45,7 +52,6 @@ void MainWindow::on_button_selectFile_clicked() {
   } catch (...) {
     ui->label_fileName->setText("error path or file");
   }
-
 }
 
 //
@@ -70,7 +76,6 @@ void MainWindow::on_Slider_moveY_valueChanged(int value) {
 
   ui->widget->translateObject(0, result, 0);
 }
-
 
 void MainWindow::on_Slider_moveZ_valueChanged(int value) {
   double result = (double)value / FPS - posZ;
@@ -230,5 +235,3 @@ void MainWindow::on_button_JPG_4_clicked() {
 //
 // End styles
 //
-
-
