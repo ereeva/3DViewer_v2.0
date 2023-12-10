@@ -867,28 +867,6 @@ color: white
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QSlider" name="Slider_lineColor">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>690</y>
-      <width>121</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="minimum">
-     <number>1</number>
-    </property>
-    <property name="maximum">
-     <number>255</number>
-    </property>
-    <property name="value">
-     <number>1</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
    <widget class="QLabel" name="text_projection_3">
     <property name="geometry">
      <rect>
