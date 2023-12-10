@@ -42,7 +42,7 @@ void OGLWidget::paintGL() {
       glPointSize(pointSize);
       glColor3d(pointColor.redF(), pointColor.greenF(), pointColor.blueF());
 
-      glDrawArrays(GL_POINTS, 0, data_->VertexCount());
+      glDrawArrays(GL_POINTS, 0, data_->VertexCount() / 3);
     }
 
     glDisableClientState(GL_VERTEX_ARRAY);
