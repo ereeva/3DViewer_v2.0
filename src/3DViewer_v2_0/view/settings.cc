@@ -1,14 +1,13 @@
 #include "mainwindow.h"
 
-
 enum ProjectionType { kParallel, kCentral };
 enum EdgeType { kSolid, kDashed };
 enum VertexType { kNone, kCircle, kSquare };
 
 void MainWindow::SaveSettings() {
-  // settings_->setValue("background_color", backgroundColor);
-  // settings_->setValue("edge_color", lineColor);
-  // settings_->setValue("vertex_color", pointColor);
+  settings_->setValue("background_color", ui->widget->backgroundColor);
+  settings_->setValue("edge_color", ui->widget->lineColor);
+  settings_->setValue("vertex_color", ui->widget->pointColor);
 
   if (ui->radioButton->isChecked()) {
     settings_->setValue("projection_type", kParallel);
@@ -36,29 +35,39 @@ void MainWindow::SaveSettings() {
 }
 
 void MainWindow::RestoreSettings() {
-  // QColor backgroundColor =
-  // settings_->value("background_color").value<QColor>; QColor lineColor =
-  // settings_->value("edge_color").value<QColor>; QColor pointColor =
-  // settings_->value("vertex_color").value<QColor>;
+  ui->widget->backgroundColor =
+      settings_->value("background_color").value<QColor>();
+  ui->widget->lineColor = settings_->value("edge_color").value<QColor>();
+  ui->widget->pointColor = settings_->value("vertex_color").value<QColor>();
 
-  if (settings_->value("projection_type") == kParallel)
+  if (settings_->value("projection_type").toInt() == kParallel) {
     ui->radioButton->setChecked(true);
-  else
+    ui->widget->perspective = false;
+  } else {
     ui->radioButton_central->setChecked(true);
+    ui->widget->perspective = true;
+  }
 
   ui->Slider_lineSize->setValue(settings_->value("edge_thickness", 1).toInt());
 
-  if (settings_->value("edge_type") == kDashed)
+  if (settings_->value("edge_type").toInt() == kDashed) {
     ui->radioButton_dashed->setChecked(true);
-  else
+    ui->widget->lineType = true;
+  } else {
     ui->radioButton_solid->setChecked(true);
+    ui->widget->lineType = false;
+  }
 
   ui->Slider_pointSize->setValue(settings_->value("vertex_size", 1).toInt());
 
-  if (settings_->value("vertex_type") == kCircle)
+  if (settings_->value("vertex_type").toInt() == kCircle) {
     ui->radioButton_circle->setChecked(true);
-  if (settings_->value("vertex_type") == kSquare)
+    ui->widget->pointType = 1;
+  } else if (settings_->value("vertex_type").toInt() == kSquare) {
     ui->radioButton_sqare->setChecked(true);
-  else
+    ui->widget->pointType = 2;
+  } else {
     ui->radioButton_none->setChecked(true);
+    ui->widget->pointType = 0;
+  }
 }
