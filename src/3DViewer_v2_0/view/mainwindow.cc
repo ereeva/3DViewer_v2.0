@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
       settings_(new QSettings("3DViewer", "")) {
   ui->setupUi(this);
   RestoreSettings();
+  setStateAffinsUI(true);
 }
 
 MainWindow::~MainWindow() {
@@ -30,28 +31,43 @@ MainWindow::~MainWindow() {
 void MainWindow::on_button_selectFile_clicked() {
   QString fileName = QFileDialog::getOpenFileName(this, tr("Select a file"),
                                                   QDir::homePath(), tr(""));
-  //  ui->label_fileName->setText("  " + fileName);
-  // костыль для очистки предыдущей модели
-  // delete controller;
-  // controller = new s21::Controller;
 
-  //  потом убрать в отдельный метод
   std::string str = fileName.toStdString();
-  //  std::string str = "obj/cat.obj";
   try {
     controller->LoadObject(str);
-    ui->label_fileName->setText("  " + fileName);
-
-    size_t edgesCount = controller->FaceIndCount();
-    ui->label_edgesCount->setText(QString::number(edgesCount));
-
-    size_t verticesCount = controller->VertexCount();
-    ui->label_verticesCount->setText(QString::number(verticesCount));
-
-    ui->widget->allocate(controller);
   } catch (...) {
     ui->label_fileName->setText("error path or file");
+    setStateAffinsUI(true);
+    return;
   }
+
+  ui->widget->allocate(controller);
+
+  ui->label_fileName->setText("  " + fileName);
+  ui->label_edgesCount->setText(QString::number(
+      controller->FaceIndCount()));
+  ui->label_verticesCount->setText(QString::number(
+      controller->VertexCount()));
+
+  setStateAffinsUI(false);
+}
+
+void MainWindow::setStateAffinsUI(bool state) {
+  ui->spinBox_moveX->setDisabled(state);
+  ui->spinBox_moveY->setDisabled(state);
+  ui->spinBox_moveZ->setDisabled(state);
+  ui->spinBox_rotateX->setDisabled(state);
+  ui->spinBox_rotateY->setDisabled(state);
+  ui->spinBox_rotateZ->setDisabled(state);
+  ui->doubleSpinBox_scale->setDisabled(state);
+
+  ui->Slider_rotateX->setDisabled(state);
+  ui->Slider_rotateY->setDisabled(state);
+  ui->Slider_rotateZ->setDisabled(state);
+  ui->Slider_moveX->setDisabled(state);
+  ui->Slider_moveY->setDisabled(state);
+  ui->Slider_moveZ->setDisabled(state);
+  ui->Slider_scale->setDisabled(state);
 }
 
 //
@@ -169,68 +185,55 @@ void MainWindow::on_spinBox_rotateZ_valueChanged(int arg1) {
 //
 // Start styles
 //
-
 void MainWindow::on_radioButton_solid_clicked() {
-  ui->widget->lineType = false;
-  ui->widget->update();
+  ui->widget->setLineType(false);
 }
 
 void MainWindow::on_radioButton_dashed_clicked() {
-  ui->widget->lineType = true;
-  ui->widget->update();
+  ui->widget->setLineType(true);
 }
 
 void MainWindow::on_Slider_lineSize_valueChanged(int value) {
-  ui->widget->lineSize = (float)value;
-  ui->widget->update();
+  ui->widget->setLineSize((float)value);
 }
 
-void MainWindow::on_radioButton_clicked() {
-  ui->widget->perspective = false;
-  ui->widget->update();
+void MainWindow::on_radioButton_parallel_clicked() {
+  ui->widget->setPerspective(false);
 }
 
 void MainWindow::on_radioButton_central_clicked() {
-  ui->widget->perspective = true;
-  ui->widget->update();
+  ui->widget->setPerspective(true);
 }
 
 void MainWindow::on_Slider_pointSize_valueChanged(int value) {
-  ui->widget->pointSize = (float)value;
-  ui->widget->update();
+  ui->widget->setPointSize((float)value);
 }
 
 void MainWindow::on_radioButton_none_clicked() {
-  ui->widget->pointType = 0;
-  ui->widget->update();
+  ui->widget->setPointType(0);
 }
 
 void MainWindow::on_radioButton_circle_clicked() {
-  ui->widget->pointType = 1;
-  ui->widget->update();
+  ui->widget->setPointType(1);
 }
 
 void MainWindow::on_radioButton_sqare_clicked() {
-  ui->widget->pointType = 2;
-  ui->widget->update();
+  ui->widget->setPointType(2);
 }
 
-void MainWindow::on_button_JPG_2_clicked() {
-  QColor color = QColorDialog::getColor(Qt::white, this, "Choose color");
-  ui->widget->lineColor = color;
-  ui->widget->update();
+void MainWindow::on_button_line_color_clicked() {
+  ui->widget->setLineColor(
+      QColorDialog::getColor(Qt::white, this, "Choose line color"));
 }
 
-void MainWindow::on_button_JPG_3_clicked() {
-  QColor color = QColorDialog::getColor(Qt::white, this, "Choose color");
-  ui->widget->backgroundColor = color;
-  ui->widget->update();
+void MainWindow::on_button_BG_color_clicked() {
+  ui->widget->setBackgroudColor(
+      QColorDialog::getColor(Qt::white, this, "Choose background color"));
 }
 
-void MainWindow::on_button_JPG_4_clicked() {
-  QColor color = QColorDialog::getColor(Qt::white, this, "Choose color");
-  ui->widget->pointColor = color;
-  ui->widget->update();
+void MainWindow::on_button_point_color_clicked() {
+  ui->widget->setPointColor(
+      QColorDialog::getColor(Qt::white, this, "Choose point color"));
 }
 //
 // End styles

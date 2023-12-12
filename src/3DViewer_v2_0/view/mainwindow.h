@@ -58,7 +58,7 @@ class MainWindow : public QMainWindow {
 
   void on_Slider_lineSize_valueChanged(int value);
 
-  void on_radioButton_clicked();
+  void on_radioButton_parallel_clicked();
 
   void on_radioButton_central_clicked();
 
@@ -70,11 +70,11 @@ class MainWindow : public QMainWindow {
 
   void on_radioButton_sqare_clicked();
 
-  void on_button_JPG_2_clicked();
+  void on_button_BG_color_clicked();
 
-  void on_button_JPG_3_clicked();
+  void on_button_point_color_clicked();
 
-  void on_button_JPG_4_clicked();
+  void on_button_line_color_clicked();
 
  private:
   Ui::MainWindow *ui;
@@ -93,7 +93,8 @@ class MainWindow : public QMainWindow {
   double rotZ = 0.0;
 
   void SaveSettings();
-  void RestoreSettings(); 
+  void RestoreSettings();
+  void setStateAffinsUI(bool state);
 
 };
 #endif  // MAINWINDOW_H

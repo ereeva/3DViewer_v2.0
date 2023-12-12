@@ -24,6 +24,8 @@ class Object {
   void Scale(double x) ;
 
   void RotateX(double angle);
+  void RotateY(double angle);
+  void RotateZ(double angle);
 
  private:
   std::vector<double> vertices_{};

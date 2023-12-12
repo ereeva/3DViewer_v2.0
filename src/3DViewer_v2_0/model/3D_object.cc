@@ -39,6 +39,24 @@ void Object::RotateX(double angle) {
   }
 }
 
+void Object::RotateY(double angle) {
+  for (size_t i = 0; i < vertices_.size(); i += 3) {
+    double temp_x = vertices_[i + 0 % 3];
+    double temp_z = vertices_[i + 2 % 3];
+    vertices_[i + (0 + 0) % 3] = cos(angle) * temp_x + sin(angle) * temp_z;
+    vertices_[i + (0 + 2) % 3] = sin(angle) * -temp_x + cos(angle) * temp_z;
+  }
+}
+
+void Object::RotateZ(double angle) {
+  for (size_t i = 0; i < vertices_.size(); i += 3) {
+    double temp_x = vertices_[i + 0 % 3];
+    double temp_y = vertices_[i + 1 % 3];
+    vertices_[i + (0 + 0) % 3] = cos(angle) * temp_x + sin(angle) * temp_y;
+    vertices_[i + (0 + 1) % 3] = cos(angle) * temp_y - sin(angle) * temp_x;
+  }
+}
+
 void Object::Scale(double x) {
   if (x != 0)
     for (size_t i = 0; i < vertices_.size(); ++i) vertices_[i] *= x;

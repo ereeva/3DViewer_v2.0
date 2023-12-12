@@ -17,10 +17,11 @@ void OGLWidget::paintGL() {
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_DOUBLE, 0, data_->Vertices());
 
-//    if (perspective)
-//      glFrustum(-1, 1, -1.0, 1.0, 1.0, 100.0);
-//    else
-//      glOrtho(-2, 2, -1, 1, -10, 10);
+//    if (perspective) {
+//      glFrustum(-1, 1, -1, 1, 1, 99999);
+//    } else {
+//      glOrtho(-1, 1, -1, 1, 1, 99999);
+//    }
 
     if (lineType) {
       glEnable(GL_LINE_STIPPLE);
@@ -64,16 +65,19 @@ void OGLWidget::translateObject(double x, double y, double z) {
 
 void OGLWidget::rotateObjectX(double x) {
   data_->RotateObjectX(x);
+//  data_->RotateObject(x, s21::X);
   update();
 }
 
 void OGLWidget::rotateObjectY(double y) {
-  data_->RotateObject(y, s21::Y);
+  data_->RotateObjectY(y);
+//  data_->RotateObject(y, s21::Y);
   update();
 }
 
 void OGLWidget::rotateObjectZ(double z) {
-  data_->RotateObject(z, s21::Z);
+  data_->RotateObjectZ(z);
+//  data_->RotateObject(z, s21::Z);
   update();
 }
 

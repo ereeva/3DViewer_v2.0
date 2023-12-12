@@ -8,8 +8,8 @@ void MainWindow::SaveSettings() {
   settings_->setValue("background_color", ui->widget->backgroundColor);
   settings_->setValue("edge_color", ui->widget->lineColor);
   settings_->setValue("vertex_color", ui->widget->pointColor);
-
-  if (ui->radioButton->isChecked()) {
+  
+  if (ui->radioButton_parallel->isChecked()) {
     settings_->setValue("projection_type", kParallel);
   } else {
     settings_->setValue("projection_type", kCentral);
@@ -41,7 +41,7 @@ void MainWindow::RestoreSettings() {
   ui->widget->pointColor = settings_->value("vertex_color").value<QColor>();
 
   if (settings_->value("projection_type").toInt() == kParallel) {
-    ui->radioButton->setChecked(true);
+    ui->radioButton_parallel->setChecked(true);
     ui->widget->perspective = false;
   } else {
     ui->radioButton_central->setChecked(true);
