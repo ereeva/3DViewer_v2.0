@@ -7,7 +7,12 @@
 namespace s21 {
 class Controller {
  public:
-  Controller() = default;
+  static Controller& getInstance() {
+    static Controller instance;
+    return instance;
+  }
+  Controller(const Controller&) = delete;
+  Controller& operator=(const Controller&) = delete;
   ~Controller() = default;
 
   void LoadObject(std::string &file_name);
@@ -25,6 +30,7 @@ class Controller {
   void ScaleObject(double x);
 
  private:
+  Controller() = default;
   std::unique_ptr<Object> obj_{std::make_unique<Object>()};
   std::unique_ptr<Parser> parser_{std::make_unique<Parser>()};
 };

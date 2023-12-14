@@ -78,8 +78,7 @@ class MainWindow : public QMainWindow {
 
  private:
   Ui::MainWindow *ui;
-  OGLWidget *oglwidget;
-  s21::Controller *controller;
+  s21::Controller *controller_;
 
   QSettings *settings_;
 

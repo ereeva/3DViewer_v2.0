@@ -12,8 +12,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
-      oglwidget(new OGLWidget),
-      controller(new s21::Controller),
+      controller_(&s21::Controller::getInstance()),
       settings_(new QSettings("3DViewer", "")) {
   ui->setupUi(this);
   RestoreSettings();
@@ -24,8 +23,7 @@ MainWindow::~MainWindow() {
   SaveSettings();
   delete settings_;
   delete ui;
-  delete oglwidget;
-  delete controller;
+  delete controller_;
 }
 
 void MainWindow::on_button_selectFile_clicked() {
@@ -34,20 +32,20 @@ void MainWindow::on_button_selectFile_clicked() {
 
   std::string str = fileName.toStdString();
   try {
-    controller->LoadObject(str);
+    controller_->LoadObject(str);
   } catch (...) {
     ui->label_fileName->setText("error path or file");
     setStateAffinsUI(true);
     return;
   }
 
-  ui->widget->allocate(controller);
+  ui->widget->allocate(controller_);
 
   ui->label_fileName->setText("  " + fileName);
   ui->label_edgesCount->setText(QString::number(
-      controller->FaceIndCount()));
+      controller_->FaceIndCount()));
   ui->label_verticesCount->setText(QString::number(
-      controller->VertexCount()));
+      controller_->VertexCount()));
 
   setStateAffinsUI(false);
 }
