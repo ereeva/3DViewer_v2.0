@@ -2,7 +2,7 @@
 
 namespace s21 {
 void Controller::LoadObject(std::string &file_name) {
-    obj_ = std::move(parser_->Parse(file_name));
+    obj_ = parser_->Parse(file_name);
 }
 
 size_t Controller::VertexCount() const { return obj_->VertexCount(); }
