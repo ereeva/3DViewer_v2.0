@@ -3,7 +3,9 @@
 
 #include <QMainWindow>
 #include <QSettings>
+#include <QTimer>
 
+#include "../3rdparty/QtGifImage/gifimage/qgifimage.h"
 #include "ui_mainwindow.h"
 #include "oglwidget.h"
 #include "controller/controller.h"
@@ -76,11 +78,22 @@ class MainWindow : public QMainWindow {
 
   void on_button_line_color_clicked();
 
+  void on_button_JPG_clicked();
+
+  void on_button_BPM_clicked();
+
+  void on_button_GIF_clicked();
+
+  void RecordGif();
+
  private:
   Ui::MainWindow *ui;
   s21::Controller *controller_;
 
   QSettings *settings_;
+
+  QGifImage *gif_;
+  QTimer *timer_;
 
   int FPS = 100;
   double posX = 0.0;
