@@ -3,10 +3,12 @@
 #include <cmath>
 #include <cstddef>
 #include <vector>
+#include <stdexcept>
 
 namespace s21 {
 
 Object::Object(std::vector<double> &v, std::vector<int> &f) {
+  if(v.size() < 3) throw std::invalid_argument("no vertices");
   v.swap(vertices_);
   f.swap(face_indices_);
 }
