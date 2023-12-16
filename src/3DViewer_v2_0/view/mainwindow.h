@@ -4,8 +4,9 @@
 #include <QMainWindow>
 #include <QSettings>
 #include <QTimer>
+#include <qgifimage.h>
+#include <qgifglobal.h>
 
-#include "../3rdparty/QtGifImage/gifimage/qgifimage.h"
 #include "ui_mainwindow.h"
 #include "oglwidget.h"
 #include "controller/controller.h"
