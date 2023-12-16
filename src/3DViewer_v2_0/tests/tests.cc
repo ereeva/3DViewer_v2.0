@@ -54,19 +54,18 @@ TEST(Object, rotation) {
   auto obj = p.Parse("tests/models/test.obj");
 
   obj->Rotate(2, s21::X);
-  std::vector<double> v{-0.5, 0.662722, -0.246575, 0,       -0,
+  std::vector<double> v{-0.5, 0.662722, -0.246575, 0,       0,
                         0,    0.5,      -0.662722, 0.246575};
   for (size_t i = 0; i < v.size(); ++i)
     EXPECT_NEAR(obj->Vertices()[i], v[i], kEps);
 
   obj->Rotate(-1.3, s21::Y);
-  v = {0.41582, 0.662722, -0.547738, 0, -0, 0, -0.41582, -0.662722, 0.547738};
+  v = {0.10384, 0.662722, -0.547738, 0, 0, 0, -0.10384, -0.662722, 0.547738};
   for (size_t i = 0; i < v.size(); ++i)
     EXPECT_NEAR(obj->Vertices()[i], v[i], kEps);
 
   obj->Rotate(0.6, s21::Z);
-  v = {-0.0310096, 0.717393,  -0.547738, 0,       0,
-       0,          0.0310096, -0.717393, 0.547738};
+  v = {-0.288498, 0.605601, -0.547738, 0, 0, 0, 0.288498, -0.605601, 0.547738 };
   for (size_t i = 0; i < v.size(); ++i)
     EXPECT_NEAR(obj->Vertices()[i], v[i], kEps);
 }
