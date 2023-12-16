@@ -79,19 +79,16 @@ void OGLWidget::translateObject(double x, double y, double z) {
 }
 
 void OGLWidget::rotateObjectX(double x) {
-  // data_->RotateObjectX(x);
   data_->RotateObject(x, s21::X);
   update();
 }
 
 void OGLWidget::rotateObjectY(double y) {
-  // data_->RotateObjectY(y);
   data_->RotateObject(y, s21::Y);
   update();
 }
 
 void OGLWidget::rotateObjectZ(double z) {
-  // data_->RotateObjectZ(z);
   data_->RotateObject(z, s21::Z);
   update();
 }
