@@ -16,4 +16,4 @@ void Controller::TranslateObject(double x, Axis a) { obj_->Translate(x, a); }
 void Controller::RotateObject(double x, Axis a) { obj_->Rotate(x, a); }
 void Controller::ScaleObject(double x) { obj_->Scale(x); }
 
-}  // namespace s21
+} // namespace s21
