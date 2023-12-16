@@ -2,13 +2,13 @@
 
 #include <cmath>
 #include <cstddef>
-#include <vector>
 #include <stdexcept>
+#include <vector>
 
 namespace s21 {
 
 Object::Object(std::vector<double> &v, std::vector<int> &f) {
-  if(v.size() < 3) throw std::invalid_argument("no vertices");
+  if (v.size() < 3) throw std::invalid_argument("no vertices");
   v.swap(vertices_);
   f.swap(face_indices_);
 }
@@ -28,34 +28,7 @@ void Object::Rotate(double x, Axis axis) {
     double y = vertices_[i + (axis + 1) % 3];
     double z = vertices_[i + (axis + 2) % 3];
     vertices_[i + (axis + 1) % 3] = cos(x) * y - sin(x) * z;
-    vertices_[i + (axis + 2) % 3] = cos(x) * y + sin(x) * z;
-  }
-}
-
-void Object::RotateX(double angle) {
-  for (size_t i = 0; i < vertices_.size(); i += 3) {
-    double temp_y = vertices_[i + 1 % 3];
-    double temp_z = vertices_[i + 2 % 3];
-    vertices_[i + (0 + 1) % 3] = cos(angle) * temp_y + sin(angle) * temp_z;
-    vertices_[i + (0 + 2) % 3] = sin(angle) * -temp_y + cos(angle) * temp_z;
-  }
-}
-
-void Object::RotateY(double angle) {
-  for (size_t i = 0; i < vertices_.size(); i += 3) {
-    double temp_x = vertices_[i + 0 % 3];
-    double temp_z = vertices_[i + 2 % 3];
-    vertices_[i + (0 + 0) % 3] = cos(angle) * temp_x + sin(angle) * temp_z;
-    vertices_[i + (0 + 2) % 3] = sin(angle) * -temp_x + cos(angle) * temp_z;
-  }
-}
-
-void Object::RotateZ(double angle) {
-  for (size_t i = 0; i < vertices_.size(); i += 3) {
-    double temp_x = vertices_[i + 0 % 3];
-    double temp_y = vertices_[i + 1 % 3];
-    vertices_[i + (0 + 0) % 3] = cos(angle) * temp_x + sin(angle) * temp_y;
-    vertices_[i + (0 + 1) % 3] = cos(angle) * temp_y - sin(angle) * temp_x;
+    vertices_[i + (axis + 2) % 3] = sin(x) * y + cos(x) * z;
   }
 }
 

@@ -1,10 +1,10 @@
 #ifndef OGLWIDGET_H
 #define OGLWIDGET_H
 
-//#include <QObject>
+// #include <QObject>
 #include <QOpenGLFunctions>
 #include <QOpenGLWidget>
-//#include <QtOpenGLWidgets>
+// #include <QtOpenGLWidgets>
 
 #include "../controller/controller.h"
 
@@ -39,17 +39,45 @@ class OGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
   void scaleObject(double x);
 
   // setters
-  void setBackgroudColor(QColor bgcolor) { backgroundColor = bgcolor; update(); }
-  void setLineType(bool type) { lineType = type; update(); }
-  void setLineSize(float size) { lineSize = size; update(); }
-  void setPointSize(float size) { pointSize = size; update(); }
-  void setPointType(int type) { pointType = type; update(); }
-  void setPointColor(QColor color) { pointColor = color; update(); }
-  void setPerspective(bool perspective) {this->perspective = perspective; update();}
-  void setLineColor(QColor color) { lineColor = color; update(); }
+  void setBackgroudColor(QColor bgcolor) {
+    backgroundColor = bgcolor;
+    update();
+  }
+  void setLineType(bool type) {
+    lineType = type;
+    update();
+  }
+  void setLineSize(float size) {
+    lineSize = size;
+    update();
+  }
+  void setPointSize(float size) {
+    pointSize = size;
+    update();
+  }
+  void setPointType(int type) {
+    pointType = type;
+    update();
+  }
+  void setPointColor(QColor color) {
+    pointColor = color;
+    update();
+  }
+  void setPerspective(bool perspective) {
+    this->perspective = perspective;
+    update();
+  }
+  void setLineColor(QColor color) {
+    lineColor = color;
+    update();
+  }
 
  private:
   s21::Controller *data_ = nullptr;
+
+  void SetProjectionType() const;
+  void DrawVertices();
+  void DrawEdges();
 };
 
 #endif  // OGLWIDGET_H
