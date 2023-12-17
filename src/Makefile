@@ -33,7 +33,7 @@ ifeq ($(OS), Darwin)
 	OPEN_CMD=open ./$(BUILD_DIR)/$(PROJECT_NAME).app
 endif
 
-.PHONY: all $(TEST) $(TEST_BUILD) $(TEST_GCOV) $(TEST_BUILD_GCOV) build install uninstall gcov_report lcov_report dvi dist clean rebuild clang style valgrind leaks
+.PHONY: all $(TEST) $(TEST_BUILD) build install uninstall gcov_report dvi dist clean rebuild clang style valgrind leaks
 
 all: install
 
