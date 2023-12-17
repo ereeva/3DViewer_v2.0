@@ -60,11 +60,11 @@ $(OBJ_DIR_TEST)/%.o: %.cc
 	$(CC) $(CFLAGS) $(OFLAGS) -c $< -o $@
 
 dist:
-	mkdir -p src
-	@cp Makefile src
-	@cp -r $(PROJECT_NAME) src
-	tar cvzf $(PROJECT_NAME).tgz $(PROJECT_NAME)/
-	rm -rf $(PROJECT_NAME)/
+	mkdir -p viewer
+	@cp Makefile viewer
+	@cp -r $(PROJECT_NAME) viewer
+	tar cvzf $(PROJECT_NAME).tgz viewer/
+	rm -rf viewer/
 
 clean:
 	rm -rf $(OBJ_DIR) $(GCOV_DIR) $(TEST) $(TEST_GCOV) $(DOC).pdf
