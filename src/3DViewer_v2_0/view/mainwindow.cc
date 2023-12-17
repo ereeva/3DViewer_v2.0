@@ -42,10 +42,8 @@ void MainWindow::on_button_selectFile_clicked() {
   ui->widget->allocate(controller_);
 
   ui->label_fileName->setText("  " + fileName);
-  ui->label_edgesCount->setText(QString::number(
-      controller_->FaceIndCount()));
-  ui->label_verticesCount->setText(QString::number(
-      controller_->VertexCount()));
+  ui->label_edgesCount->setText(QString::number(controller_->FaceIndCount()));
+  ui->label_verticesCount->setText(QString::number(controller_->VertexCount()));
 
   setStateAffinsUI(false);
 }
@@ -207,17 +205,13 @@ void MainWindow::on_Slider_pointSize_valueChanged(int value) {
   ui->widget->setPointSize((float)value);
 }
 
-void MainWindow::on_radioButton_none_clicked() {
-  ui->widget->setPointType(0);
-}
+void MainWindow::on_radioButton_none_clicked() { ui->widget->setPointType(0); }
 
 void MainWindow::on_radioButton_circle_clicked() {
   ui->widget->setPointType(1);
 }
 
-void MainWindow::on_radioButton_sqare_clicked() {
-  ui->widget->setPointType(2);
-}
+void MainWindow::on_radioButton_sqare_clicked() { ui->widget->setPointType(2); }
 
 void MainWindow::on_button_line_color_clicked() {
   ui->widget->setLineColor(

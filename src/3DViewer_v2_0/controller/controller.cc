@@ -1,9 +1,9 @@
 #include "controller.h"
 
 namespace s21 {
-  
+
 void Controller::LoadObject(std::string &file_name) {
-    obj_ = parser_->Parse(file_name);
+  obj_ = parser_->Parse(file_name);
 }
 
 size_t Controller::VertexCount() const { return obj_->VertexCount(); }
@@ -17,4 +17,4 @@ void Controller::TranslateObject(double x, Axis a) { obj_->Translate(x, a); }
 void Controller::RotateObject(double x, Axis a) { obj_->Rotate(x, a); }
 void Controller::ScaleObject(double x) { obj_->Scale(x); }
 
-} // namespace s21
+}  // namespace s21

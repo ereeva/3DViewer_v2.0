@@ -7,12 +7,12 @@
 namespace s21 {
 class Controller {
  public:
-  static Controller& getInstance() {
+  static Controller &getInstance() {
     static Controller instance;
     return instance;
   }
-  Controller(const Controller&) = delete;
-  Controller& operator=(const Controller&) = delete;
+  Controller(const Controller &) = delete;
+  Controller &operator=(const Controller &) = delete;
   ~Controller() = default;
 
   void LoadObject(std::string &file_name);

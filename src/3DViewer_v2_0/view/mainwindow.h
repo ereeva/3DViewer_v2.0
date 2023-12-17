@@ -1,15 +1,16 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <qgifglobal.h>
+#include <qgifimage.h>
+
 #include <QMainWindow>
 #include <QSettings>
 #include <QTimer>
-#include <qgifimage.h>
-#include <qgifglobal.h>
 
-#include "ui_mainwindow.h"
-#include "oglwidget.h"
 #include "controller/controller.h"
+#include "oglwidget.h"
+#include "ui_mainwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -108,6 +109,5 @@ class MainWindow : public QMainWindow {
   void SaveSettings();
   void RestoreSettings();
   void setStateAffinsUI(bool state);
-
 };
 #endif  // MAINWINDOW_H

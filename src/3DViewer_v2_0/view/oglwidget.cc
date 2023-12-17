@@ -32,8 +32,7 @@ void OGLWidget::SetProjectionType() const {
   if (perspective) {
     glFrustum(-0.8, 0.8, -0.6, 0.6, 1, 100);
     glTranslatef(0, 0, -3);
-  }
-  else
+  } else
     glOrtho(-1, 1, -0.75, 0.75, -100, 100);
 }
 

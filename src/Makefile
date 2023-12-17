@@ -64,10 +64,10 @@ dist:
 	@cp Makefile viewer
 	@cp -r $(PROJECT_NAME) viewer
 	tar cvzf $(PROJECT_NAME).tgz viewer/
-	rm -rf viewer/
+	rm -rf viewer
 
 clean:
-	rm -rf $(OBJ_DIR) $(GCOV_DIR) $(TEST) $(TEST_GCOV) $(DOC).pdf
+	rm -rf $(OBJ_DIR) $(GCOV_DIR) $(TEST) $(TEST_GCOV)
 
 style:
 	clang-format -n --style=Google $(CLANG_FILES)
@@ -79,7 +79,7 @@ valgrind: $(TEST_BUILD)
 	valgrind --tool=memcheck --leak-check=yes ./$(TEST)
 
 leaks: $(TEST_BUILD)
-	leaks -atExit -- ./$(TEST) | grep LEAK:
+	leaks -atExit -- ./$(TEST)
 
 # $(TEST_GCOV): $(TEST_BUILD_GCOV)
 # 	$(MAKE) clean_gcda

@@ -14,13 +14,13 @@ TEST(Parser, none) {
 TEST(Parser, invalid_vertex) {
   s21::Parser p;
 
-  EXPECT_THROW(p.Parse("tests/models/invalid_vertex.obj"),
+  EXPECT_THROW(p.Parse("3DViewer_v2_0/tests/models/invalid_vertex.obj"),
                std::invalid_argument);
 }
 
 TEST(Parser, parse) {
   s21::Parser p;
-  auto obj = p.Parse("tests/models/test.obj");
+  auto obj = p.Parse("3DViewer_v2_0/tests/models/test.obj");
 
   std::vector<double> v{-0.5, -0.5, -0.5, 0, 0, 0, 0.5, 0.5, 0.5};
   std::vector<int> f{0, 1, 1, 2, 2, 0};
@@ -31,7 +31,7 @@ TEST(Parser, parse) {
 
 TEST(Object, translation) {
   s21::Parser p;
-  auto obj = p.Parse("tests/models/test.obj");
+  auto obj = p.Parse("3DViewer_v2_0/tests/models/test.obj");
 
   obj->Translate(1.3, s21::X);
   std::vector<double> v{0.8, -0.5, -0.5, 1.3, 0, 0, 1.8, 0.5, 0.5};
@@ -51,7 +51,7 @@ TEST(Object, translation) {
 
 TEST(Object, rotation) {
   s21::Parser p;
-  auto obj = p.Parse("tests/models/test.obj");
+  auto obj = p.Parse("3DViewer_v2_0/tests/models/test.obj");
 
   obj->Rotate(2, s21::X);
   std::vector<double> v{-0.5, 0.662722, -0.246575, 0,       0,
@@ -65,14 +65,14 @@ TEST(Object, rotation) {
     EXPECT_NEAR(obj->Vertices()[i], v[i], kEps);
 
   obj->Rotate(0.6, s21::Z);
-  v = {-0.288498, 0.605601, -0.547738, 0, 0, 0, 0.288498, -0.605601, 0.547738 };
+  v = {-0.288498, 0.605601, -0.547738, 0, 0, 0, 0.288498, -0.605601, 0.547738};
   for (size_t i = 0; i < v.size(); ++i)
     EXPECT_NEAR(obj->Vertices()[i], v[i], kEps);
 }
 
 TEST(Object, Scale) {
   s21::Parser p;
-  auto obj = p.Parse("tests/models/test.obj");
+  auto obj = p.Parse("3DViewer_v2_0/tests/models/test.obj");
 
   obj->Scale(4.2);
   std::vector<double> v{-2.1, -2.1, -2.1, 0, 0, 0, 2.1, 2.1, 2.1};

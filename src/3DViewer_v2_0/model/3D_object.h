@@ -11,17 +11,17 @@ enum Axis { X, Y, Z };
 class Object {
  public:
   Object() = default;
-  Object(std::vector<double> &v, std::vector<int> &f) ;
+  Object(std::vector<double> &v, std::vector<int> &f);
   ~Object() = default;
 
-  const std::vector<double> &Vertices() const ;
-  const std::vector<int> &FaceIndices() const ;
-  size_t VertexCount() const ;
-  size_t FaceIndCount() const ;
+  const std::vector<double> &Vertices() const;
+  const std::vector<int> &FaceIndices() const;
+  size_t VertexCount() const;
+  size_t FaceIndCount() const;
 
-  void Translate(double x, Axis axis) ;
-  void Rotate(double x, Axis axis) ;
-  void Scale(double x) ;
+  void Translate(double x, Axis axis);
+  void Rotate(double x, Axis axis);
+  void Scale(double x);
 
  private:
   std::vector<double> vertices_{};
