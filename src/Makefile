@@ -23,7 +23,6 @@ TEST=test
 TEST_GCOV=$(TEST)_gcov
 TEST_BUILD=$(TEST)_build
 TEST_BUILD_GCOV=$(TEST_BUILD)_gcov
-VPATH=$(TEST_DIR):$(MODEL_DIR)
 
 OS := $(shell uname -s)
 ifeq ($(OS), Linux)
@@ -33,7 +32,7 @@ ifeq ($(OS), Darwin)
 	OPEN_CMD=open ./$(BUILD_DIR)/$(PROJECT_NAME).app
 endif
 
-.PHONY: all $(TEST) $(TEST_BUILD) build install uninstall gcov_report dvi dist clean rebuild clang style valgrind leaks
+.PHONY: all $(TEST) $(TEST_BUILD) install uninstall open gcov_report dvi dist clean clang style valgrind leaks
 
 all: install
 
