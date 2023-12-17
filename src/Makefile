@@ -1,15 +1,108 @@
-PROJECT_NAME := 3DViewer_v2_0
-BUILD_DIR := build
-OS := $(shell uname -s)
-CC=qmake
+CC=g++
+CFLAGS=-Wall -Wextra -Werror -std=c++17 -fmax-errors=1
+OFLAGS=-O2
+LDFLAGS=-lgtest -pthread
+# GCOVFLAGS=--coverage
+# GCOV_DIR=gcov
 
+PROJECT_NAME=3DViewer_v2_0
+SRC_DIR=3DViewer_v2_0
+TEST_DIR=$(SRC_DIR)/tests
+MODEL_DIR=$(SRC_DIR)/model
+BUILD_DIR=build
+OBJ_DIR=obj
+OBJ_DIR_GCOV=$(OBJ_DIR)/$(GCOV_DIR)
+OBJ_DIR_TEST=$(OBJ_DIR)/$(TEST_DIR)
+
+TEST_SRCS=$(wildcard $(TEST_DIR)/*.cc $(MODEL_DIR)/*.cc)
+TEST_OBJS=$(patsubst %.cc, $(OBJ_DIR_TEST)/%.o, $(notdir $(TEST_SRCS)))
+GCOV_OBJS=$(patsubst %.cc, $(OBJ_DIR_GCOV)/%.o, $(notdir $(TEST_SRCS)))
+CLANG_FILES=$(shell find $(SRC_DIR) \( -name "*.cc" -o -name "*.h" \))
+
+TEST=test
+TEST_GCOV=$(TEST)_gcov
+TEST_BUILD=$(TEST)_build
+TEST_BUILD_GCOV=$(TEST_BUILD)_gcov
+VPATH=$(TEST_DIR):$(MODEL_DIR)
+
+# DOC=doc_3DViewer_v2
+
+OS := $(shell uname -s)
 ifeq ($(OS), Linux)
-	CC=qmake6
+	OPEN_CMD=./$(BUILD_DIR)/$(PROJECT_NAME)
+endif
+ifeq ($(OS), Darwin)
+	OPEN_CMD=open ./$(BUILD_DIR)/$(PROJECT_NAME).app
 endif
 
-all: build
+.PHONY: all $(TEST) $(TEST_BUILD) $(TEST_GCOV) $(TEST_BUILD_GCOV) build install uninstall gcov_report lcov_report dvi dist clean rebuild clang style valgrind leaks
 
-.PHONY: build
-build:
-	mkdir -p $(BUILD_DIR)
-	cd $(BUILD_DIR) && $(CC) ../$(PROJECT_NAME)/ && make
+all: install
+
+install: uninstall
+	@mkdir -p $(BUILD_DIR)
+	cd ./$(BUILD_DIR)/ && qmake ../$(PROJECT_NAME) && make
+
+uninstall: clean
+	rm -rf $(BUILD_DIR)
+
+open:
+	$(OPEN_CMD)
+
+$(TEST): $(TEST_BUILD)
+	./$@ || true
+
+$(TEST_BUILD): $(TEST_OBJS)
+	$(CC) $(CFLAGS) $^ $(LDFLAGS) $(OFLAGS) -o $(TEST)
+
+$(OBJ_DIR_TEST)/%.o: %.cc
+	@mkdir -p $(OBJ_DIR_TEST)
+	$(CC) $(CFLAGS) $(OFLAGS) -c $< -o $@
+
+dist:
+	mkdir -p src
+	@cp Makefile src
+	@cp -r $(PROJECT_NAME) src
+	tar cvzf $(PROJECT_NAME).tgz $(PROJECT_NAME)/
+	rm -rf $(PROJECT_NAME)/
+
+clean:
+	rm -rf $(OBJ_DIR) $(GCOV_DIR) $(TEST) $(TEST_GCOV) $(DOC).pdf
+
+style:
+	clang-format -n --style=Google $(CLANG_FILES)
+
+clang:
+	clang-format -i --style=Google $(CLANG_FILES)
+
+valgrind: $(TEST_BUILD)
+	valgrind --tool=memcheck --leak-check=yes ./$(TEST)
+
+leaks: $(TEST_BUILD)
+	leaks -atExit -- ./$(TEST) | grep LEAK:
+
+# $(TEST_GCOV): $(TEST_BUILD_GCOV)
+# 	$(MAKE) clean_gcda
+# 	./$@ || true
+
+# $(TEST_BUILD_GCOV): $(GCOV_OBJS)
+# 	$(CC) $(CFLAGS) $^ $(LDFLAGS) $(GCOVFLAGS) -o $(TEST_GCOV)
+
+# $(OBJ_DIR_GCOV)/%.o: %.cc
+# 	@mkdir -p $(OBJ_DIR_GCOV)
+# 	$(CC) $(CFLAGS) $(GCOVFLAGS) -c $< -o $@
+
+# gcov_report: $(TEST_GCOV)
+# 	mkdir -p $(GCOV_DIR)
+# 	gcovr --html-details -o $(GCOV_DIR)/index.html --filter $(MODEL_DIR)/s21_\.\*
+# 	open $(GCOV_DIR)/index.html
+
+# lcov_report: $(TEST_GCOV)
+# 	mkdir -p $(GCOV_DIR)
+# 	lcov --capture --directory $(SRC_DIR) --exclude "$(CURDIR)/tests/*" --output-file $(GCOV_DIR)/coverage.info --no-external
+# 	genhtml -o $(GCOV_DIR) $(GCOV_DIR)/coverage.info 
+# 	open $(GCOV_DIR)/index.html
+
+# dvi:
+# 	texi2dvi --clean --pdf $(DOC).texi
+# 	open $(DOC).pdf
