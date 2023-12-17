@@ -1,3 +1,4 @@
+#define GL_SILENCE_DEPRECATION
 #include "oglwidget.h"
 
 OGLWidget::OGLWidget(QWidget *parent) : QOpenGLWidget{parent} {}

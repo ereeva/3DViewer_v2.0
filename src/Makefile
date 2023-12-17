@@ -25,8 +25,6 @@ TEST_BUILD=$(TEST)_build
 TEST_BUILD_GCOV=$(TEST_BUILD)_gcov
 VPATH=$(TEST_DIR):$(MODEL_DIR)
 
-# DOC=doc_3DViewer_v2
-
 OS := $(shell uname -s)
 ifeq ($(OS), Linux)
 	OPEN_CMD=./$(BUILD_DIR)/$(PROJECT_NAME)
@@ -66,6 +64,9 @@ dist:
 	tar cvzf $(PROJECT_NAME).tgz viewer/
 	rm -rf viewer
 
+# dvi:
+
+
 clean:
 	rm -rf $(OBJ_DIR) $(GCOV_DIR) $(TEST) $(TEST_GCOV)
 
@@ -102,7 +103,3 @@ leaks: $(TEST_BUILD)
 # 	lcov --capture --directory $(SRC_DIR) --exclude "$(CURDIR)/tests/*" --output-file $(GCOV_DIR)/coverage.info --no-external
 # 	genhtml -o $(GCOV_DIR) $(GCOV_DIR)/coverage.info 
 # 	open $(GCOV_DIR)/index.html
-
-# dvi:
-# 	texi2dvi --clean --pdf $(DOC).texi
-# 	open $(DOC).pdf
