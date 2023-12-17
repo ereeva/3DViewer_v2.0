@@ -7,14 +7,13 @@ LDFLAGS=-lgtest -pthread
 
 PROJECT_NAME=3DViewer_v2_0
 SRC_DIR=3DViewer_v2_0
-TEST_DIR=$(SRC_DIR)/tests
-MODEL_DIR=$(SRC_DIR)/model
 BUILD_DIR=build
+INSTALL_DIR=install
 OBJ_DIR=obj
 OBJ_DIR_GCOV=$(OBJ_DIR)/$(GCOV_DIR)
-OBJ_DIR_TEST=$(OBJ_DIR)/$(TEST_DIR)
+OBJ_DIR_TEST=$(OBJ_DIR)/$(SRC_DIR)/tests
 
-TEST_SRCS=$(wildcard $(TEST_DIR)/*.cc $(MODEL_DIR)/*.cc)
+TEST_SRCS=$(wildcard $(SRC_DIR)/tests/*.cc $(SRC_DIR)/model/*.cc)
 TEST_OBJS=$(patsubst %.cc, $(OBJ_DIR_TEST)/%.o, $(notdir $(TEST_SRCS)))
 GCOV_OBJS=$(patsubst %.cc, $(OBJ_DIR_GCOV)/%.o, $(notdir $(TEST_SRCS)))
 CLANG_FILES=$(shell find $(SRC_DIR) \( -name "*.cc" -o -name "*.h" \))
@@ -26,22 +25,26 @@ TEST_BUILD_GCOV=$(TEST_BUILD)_gcov
 
 OS := $(shell uname -s)
 ifeq ($(OS), Linux)
-	OPEN_CMD=./$(BUILD_DIR)/$(PROJECT_NAME)
+	OPEN_CMD=./$(INSTALL_DIR)/$(PROJECT_NAME)
 endif
 ifeq ($(OS), Darwin)
-	OPEN_CMD=open ./$(BUILD_DIR)/$(PROJECT_NAME).app
+	OPEN_CMD=open ./$(INSTALL_DIR)/$(PROJECT_NAME).app
 endif
 
-.PHONY: all $(TEST) $(TEST_BUILD) install uninstall open gcov_report dvi dist clean clang style valgrind leaks
+.PHONY: all $(TEST) $(TEST_BUILD) build install uninstall open gcov_report dvi dist clean clang style valgrind leaks
 
 all: install
 
-install: uninstall
-	@mkdir -p $(BUILD_DIR)
-	cd ./$(BUILD_DIR)/ && qmake ../$(PROJECT_NAME) && make
+build: uninstall
+	mkdir -p $(BUILD_DIR)
+	cd $(BUILD_DIR) && qmake ../$(PROJECT_NAME)/ && make
+
+install: build
+	mkdir -p $(INSTALL_DIR)
+	cp -r $(BUILD_DIR)/$(PROGRAM) $(INSTALL_DIR)/
 
 uninstall: clean
-	rm -rf $(BUILD_DIR)
+	rm -rf $(INSTALL_DIR)
 
 open:
 	$(OPEN_CMD)
@@ -53,13 +56,13 @@ $(TEST_BUILD): $(TEST_OBJS)
 	$(CC) $(CFLAGS) $^ $(LDFLAGS) $(OFLAGS) -o $(TEST)
 
 $(OBJ_DIR_TEST)/%.o: %.cc
-	@mkdir -p $(OBJ_DIR_TEST)
+	mkdir -p $(OBJ_DIR_TEST)
 	$(CC) $(CFLAGS) $(OFLAGS) -c $< -o $@
 
 dist:
 	mkdir -p viewer
-	@cp Makefile viewer
-	@cp -r $(PROJECT_NAME) viewer
+	cp Makefile viewer
+	cp -r $(PROJECT_NAME) viewer
 	tar cvzf $(PROJECT_NAME).tgz viewer/
 	rm -rf viewer
 
@@ -67,7 +70,7 @@ dist:
 
 
 clean:
-	rm -rf $(OBJ_DIR) $(GCOV_DIR) $(TEST) $(TEST_GCOV)
+	rm -rf $(BUILD_DIR) $(OBJ_DIR) $(TEST)
 
 style:
 	clang-format -n --style=Google $(CLANG_FILES)
