@@ -44,7 +44,12 @@ $(TEST): $(TEST_BUILD)
 	./$(TEST)
 
 $(TEST_BUILD):
-		$(CC) $(CPPFLAGS) $(OFLAGS) $(TEST_SRCS) -o $(TEST) $(LDFLAGS)
+	$(CC) $(CPPFLAGS) --coverage $(OFLAGS) $(TEST_SRCS) -o $(TEST) $(LDFLAGS)
+
+gcov_report: $(TEST)
+	lcov -t "test" -o test.info -c -d . --no-external
+	genhtml -o report test.info
+	open report/index.html
 
 dist:
 	mkdir -p viewer
