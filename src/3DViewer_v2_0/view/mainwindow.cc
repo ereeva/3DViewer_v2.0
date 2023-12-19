@@ -32,7 +32,7 @@ s21::MainWindow::~MainWindow() {
 void s21::MainWindow::on_button_selectFile_clicked() {
   ClearControls();
   QString fileName = QFileDialog::getOpenFileName(
-      this, tr("Select a file"), QDir::homePath(), "Obj files (*.obj)");
+      this, tr("Select a file"), "~/", tr("Obj files (*.obj)"));
 
   std::string str = fileName.toStdString();
   try {
