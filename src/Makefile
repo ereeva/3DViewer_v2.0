@@ -15,11 +15,11 @@ CLANG_FILES=$(shell find $(PROJECT_NAME) \( -name "*.cc" -o -name "*.h" \))
 OS := $(shell uname -s)
 ifeq ($(OS), Linux)
 	PROGRAM=$(PROJECT_NAME)
-	OPEN_CMD=
+	OPEN=
 endif
 ifeq ($(OS), Darwin)
 	PROGRAM=$(PROJECT_NAME).app
-	OPEN_CMD=open
+	OPEN=open
 endif
 
 .PHONY: all $(TEST) $(TEST_BUILD) build install uninstall open gcov_report dvi dist clean clang style valgrind leaks
@@ -38,7 +38,7 @@ uninstall: clean
 	rm -rf $(INSTALL_DIR)
 
 open:
-	$(OPEN_CMD) ./$(INSTALL_DIR)/$(PROGRAM)
+	$(OPEN) ./$(INSTALL_DIR)/$(PROGRAM)
 
 $(TEST): $(TEST_BUILD)
 	./$(TEST)
@@ -53,11 +53,12 @@ dist:
 	tar cvzf $(PROJECT_NAME).tgz viewer/
 	rm -rf viewer
 
-# dvi:
-
+dvi:
+	doxygen Doxyfile
+	$(OPEN) ./documentation/html/index.html
 
 clean:
-	rm -rf $(BUILD_DIR) $(TEST)
+	rm -rf $(BUILD_DIR) $(TEST) documentation
 
 style:
 	clang-format -n --style=Google $(CLANG_FILES)

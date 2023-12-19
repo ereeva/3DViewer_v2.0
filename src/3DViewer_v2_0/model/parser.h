@@ -15,6 +15,9 @@ class Parser {
   Parser() = default;
   ~Parser() = default;
 
+  /// @brief парсер obj файлов
+  /// @param file_name путь до файла
+  /// @return указатель на полученный в результате парсинга Object
   std::unique_ptr<Object> Parse(const std::string &file_name);
 
  private:
