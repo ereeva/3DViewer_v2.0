@@ -39,7 +39,7 @@ open:
 	$(OPEN_CMD)
 
 $(TEST): $(TEST_BUILD)
-	./test
+	./$(TEST)
 
 $(TEST_BUILD):
 		$(CC) $(CPPFLAGS) $(OFLAGS) $(TEST_SRCS) -o $(TEST) $(LDFLAGS)
