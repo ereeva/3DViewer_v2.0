@@ -26,8 +26,10 @@ void MainWindow::on_button_GIF_clicked() {
 
 void MainWindow::RecordGif() {
   static int count = 0;
-  gif_->addFrame(ui->widget->grabFramebuffer().scaled(
-      QSize(640, 480), Qt::IgnoreAspectRatio, Qt::SmoothTransformation), 0);
+  gif_->addFrame(
+      ui->widget->grabFramebuffer().scaled(
+          QSize(640, 480), Qt::IgnoreAspectRatio, Qt::SmoothTransformation),
+      0);
 
   ++count;
   if (count == 50) {

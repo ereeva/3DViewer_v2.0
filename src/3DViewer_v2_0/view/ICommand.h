@@ -10,7 +10,6 @@ class ICommand {
   virtual void undo() = 0;
 };
 
-}
+}  // namespace s21
 
-
-#endif // ICOMMAND_H
+#endif  // ICOMMAND_H

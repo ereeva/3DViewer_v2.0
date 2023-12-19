@@ -1,3 +1,4 @@
+#define GL_SILENCE_DEPRECATION
 #include "oglwidget.h"
 
 OGLWidget::OGLWidget(QWidget *parent) : QOpenGLWidget{parent} {}
@@ -32,8 +33,7 @@ void OGLWidget::SetProjectionType() const {
   if (perspective) {
     glFrustum(-0.8, 0.8, -0.6, 0.6, 1, 100);
     glTranslatef(0, 0, -3);
-  }
-  else
+  } else
     glOrtho(-1, 1, -0.75, 0.75, -100, 100);
 }
 
@@ -76,19 +76,10 @@ void OGLWidget::translateObject(double x, double y, double z) {
   data_->TranslateObject(z, s21::Z);
 }
 
-void OGLWidget::rotateObjectX(double x) {
-  data_->RotateObject(x, s21::X);
-}
+void OGLWidget::rotateObjectX(double x) { data_->RotateObject(x, s21::X); }
 
-void OGLWidget::rotateObjectY(double y) {
-  data_->RotateObject(y, s21::Y);
-}
+void OGLWidget::rotateObjectY(double y) { data_->RotateObject(y, s21::Y); }
 
-void OGLWidget::rotateObjectZ(double z) {
-  data_->RotateObject(z, s21::Z);
-}
+void OGLWidget::rotateObjectZ(double z) { data_->RotateObject(z, s21::Z); }
 
-void OGLWidget::scaleObject(double x) {
-  data_->ScaleObject(x);
-}
-
+void OGLWidget::scaleObject(double x) { data_->ScaleObject(x); }

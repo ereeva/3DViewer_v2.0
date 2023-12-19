@@ -1,16 +1,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <qgifglobal.h>
+#include <qgifimage.h>
+
 #include <QMainWindow>
 #include <QSettings>
-#include <QTimer>
-#include <qgifimage.h>
-#include <qgifglobal.h>
 #include <QStack>
+#include <QTimer>
 
-#include "ui_mainwindow.h"
-#include "controller/controller.h"
 #include "ICommand.h"
+#include "controller/controller.h"
+#include "ui_mainwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -119,14 +120,14 @@ class MainWindow : public QMainWindow {
   // commands
   s21::ICommand *solidLineCommand;
   s21::ICommand *dashedLineCommand;
-  //s21::ICommand *setPointSizeCommand;
+  // s21::ICommand *setPointSizeCommand;
 
-  QStack<s21::ICommand*> commandStack_;
+  QStack<s21::ICommand *> commandStack_;
  signals:
   void commandExecuted();
 
  public slots:
-  void executeCommand(s21::ICommand* command);
+  void executeCommand(s21::ICommand *command);
   void undoLastCommand();
 };
 #endif  // MAINWINDOW_H

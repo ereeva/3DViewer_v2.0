@@ -8,10 +8,10 @@
 #include <QSettings>
 #include <QSignalBlocker>
 
-#include "ui_mainwindow.h"
 #include "Commands.h"
+#include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
       controller_(&s21::Controller::getInstance()),
@@ -45,10 +45,8 @@ void MainWindow::on_button_selectFile_clicked() {
   ui->widget->allocate(controller_);
 
   ui->label_fileName->setText("  " + fileName);
-  ui->label_edgesCount->setText(QString::number(
-      controller_->FaceIndCount()));
-  ui->label_verticesCount->setText(QString::number(
-      controller_->VertexCount()));
+  ui->label_edgesCount->setText(QString::number(controller_->FaceIndCount()));
+  ui->label_verticesCount->setText(QString::number(controller_->VertexCount()));
 
   setStateAffinsUI(false);
 }
@@ -75,73 +73,73 @@ void MainWindow::setStateAffinsUI(bool state) {
 // Start transformations
 //
 void MainWindow::on_Slider_moveX_valueChanged(int value) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::translateObjectXCommand(ui, (double)value)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::translateObjectXCommand(ui, (double)value)));
 }
 
 void MainWindow::on_Slider_moveY_valueChanged(int value) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::translateObjectYCommand(ui, (double)value)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::translateObjectYCommand(ui, (double)value)));
 }
 
 void MainWindow::on_Slider_moveZ_valueChanged(int value) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::translateObjectZCommand(ui, (double)value)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::translateObjectZCommand(ui, (double)value)));
 }
 
 void MainWindow::on_Slider_rotateX_valueChanged(int value) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::rotateObjectXCommand(ui, (double)value)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::rotateObjectXCommand(ui, (double)value)));
 }
 
 void MainWindow::on_Slider_rotateY_valueChanged(int value) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::rotateObjectYCommand(ui, (double)value)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::rotateObjectYCommand(ui, (double)value)));
 }
 
 void MainWindow::on_Slider_rotateZ_valueChanged(int value) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::rotateObjectZCommand(ui, (double)value)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::rotateObjectZCommand(ui, (double)value)));
 }
 
 void MainWindow::on_Slider_scale_valueChanged(int value) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::scaleObjectCommand(ui, (double)value)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::scaleObjectCommand(ui, (double)value)));
 }
 
 void MainWindow::on_doubleSpinBox_scale_valueChanged(double arg1) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::scaleObjectCommand(ui, arg1 * ui->widget->FPS)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::scaleObjectCommand(ui, arg1 * ui->widget->FPS)));
 }
 
 void MainWindow::on_spinBox_moveX_valueChanged(int arg1) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::translateObjectXCommand(ui, (double)arg1)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::translateObjectXCommand(ui, (double)arg1)));
 }
 
 void MainWindow::on_spinBox_moveY_valueChanged(int arg1) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::translateObjectYCommand(ui, (double)arg1)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::translateObjectYCommand(ui, (double)arg1)));
 }
 
 void MainWindow::on_spinBox_moveZ_valueChanged(int arg1) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::translateObjectZCommand(ui, (double)arg1)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::translateObjectZCommand(ui, (double)arg1)));
 }
 
 void MainWindow::on_spinBox_rotateX_valueChanged(int arg1) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::rotateObjectXCommand(ui, (double)arg1)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::rotateObjectXCommand(ui, (double)arg1)));
 }
 
 void MainWindow::on_spinBox_rotateY_valueChanged(int arg1) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::rotateObjectYCommand(ui, (double)arg1)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::rotateObjectYCommand(ui, (double)arg1)));
 }
 
 void MainWindow::on_spinBox_rotateZ_valueChanged(int arg1) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::rotateObjectZCommand(ui, (double)arg1)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::rotateObjectZCommand(ui, (double)arg1)));
 }
 //
 // End transformations
@@ -152,56 +150,65 @@ void MainWindow::on_spinBox_rotateZ_valueChanged(int arg1) {
 //
 
 void MainWindow::on_Slider_lineSize_valueChanged(int value) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::SetLineSizeCommand(ui, (float)value)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::SetLineSizeCommand(ui, (float)value)));
 }
 
 void MainWindow::on_Slider_pointSize_valueChanged(int value) {
-  executeCommand(
-      dynamic_cast<s21::ICommand*>(new s21::SetPointSizeCommand(ui, (float)value)));
+  executeCommand(dynamic_cast<s21::ICommand*>(
+      new s21::SetPointSizeCommand(ui, (float)value)));
 }
 
 void MainWindow::on_radioButton_solid_clicked() {
-  executeCommand(dynamic_cast<s21::ICommand*>(new s21::SetLineTypeCommand(ui, false)));
+  executeCommand(
+      dynamic_cast<s21::ICommand*>(new s21::SetLineTypeCommand(ui, false)));
 }
 
 void MainWindow::on_radioButton_dashed_clicked() {
-  executeCommand(dynamic_cast<s21::ICommand*>(new s21::SetLineTypeCommand(ui, true)));
+  executeCommand(
+      dynamic_cast<s21::ICommand*>(new s21::SetLineTypeCommand(ui, true)));
 }
 
 void MainWindow::on_radioButton_parallel_clicked() {
-  executeCommand(dynamic_cast<s21::ICommand*>(new s21::SetPerspectiveCommand(ui, false)));
+  executeCommand(
+      dynamic_cast<s21::ICommand*>(new s21::SetPerspectiveCommand(ui, false)));
 }
 
 void MainWindow::on_radioButton_central_clicked() {
-  executeCommand(dynamic_cast<s21::ICommand*>(new s21::SetPerspectiveCommand(ui, true)));
+  executeCommand(
+      dynamic_cast<s21::ICommand*>(new s21::SetPerspectiveCommand(ui, true)));
 }
 
 void MainWindow::on_radioButton_none_clicked() {
-  executeCommand(dynamic_cast<s21::ICommand*>(new s21::SetPointTypeCommand(ui, 0)));
+  executeCommand(
+      dynamic_cast<s21::ICommand*>(new s21::SetPointTypeCommand(ui, 0)));
 }
 
 void MainWindow::on_radioButton_circle_clicked() {
-  executeCommand(dynamic_cast<s21::ICommand*>(new s21::SetPointTypeCommand(ui, 1)));
+  executeCommand(
+      dynamic_cast<s21::ICommand*>(new s21::SetPointTypeCommand(ui, 1)));
 }
 
 void MainWindow::on_radioButton_sqare_clicked() {
-  executeCommand(dynamic_cast<s21::ICommand*>(new s21::SetPointTypeCommand(ui, 2)));
+  executeCommand(
+      dynamic_cast<s21::ICommand*>(new s21::SetPointTypeCommand(ui, 2)));
 }
 
 void MainWindow::on_button_BG_color_clicked() {
-  executeCommand(dynamic_cast<s21::ICommand*>(
-          new s21::SetBackgroundColorCommand(ui, QColorDialog::getColor(Qt::white, this, "Choose background color"))));
+  executeCommand(
+      dynamic_cast<s21::ICommand*>(new s21::SetBackgroundColorCommand(
+          ui,
+          QColorDialog::getColor(Qt::white, this, "Choose background color"))));
 }
 
 void MainWindow::on_button_line_color_clicked() {
-  executeCommand(dynamic_cast<s21::ICommand*>(
-          new s21::SetLineColorCommand(ui, QColorDialog::getColor(Qt::white, this, "Choose line color"))));
+  executeCommand(dynamic_cast<s21::ICommand*>(new s21::SetLineColorCommand(
+      ui, QColorDialog::getColor(Qt::white, this, "Choose line color"))));
 }
 
 void MainWindow::on_button_point_color_clicked() {
-  executeCommand(dynamic_cast<s21::ICommand*>(
-          new s21::SetPointColorCommand(ui, QColorDialog::getColor(Qt::white, this, "Choose point color"))));
+  executeCommand(dynamic_cast<s21::ICommand*>(new s21::SetPointColorCommand(
+      ui, QColorDialog::getColor(Qt::white, this, "Choose point color"))));
 }
 //
 // End styles
@@ -213,7 +220,7 @@ void MainWindow::updateUI() {
   double posX = ui->widget->posX * ui->widget->FPS;
   ui->spinBox_moveX->setValue(posX);
   ui->Slider_moveX->setValue(posX);
-//  ui->Slider_moveX->setSliderPosition(posX);
+  //  ui->Slider_moveX->setSliderPosition(posX);
 
   QSignalBlocker blocker3(ui->spinBox_moveY);
   QSignalBlocker blocker4(ui->Slider_moveY);
@@ -257,20 +264,26 @@ void MainWindow::updateUI() {
   QSignalBlocker blocker16(ui->Slider_lineSize);
   ui->Slider_lineSize->setValue(ui->widget->lineSize);
 
-  QRadioButton* radioButtonToClick1 = (ui->widget->lineType) ? ui->radioButton_dashed : ui->radioButton_solid;
+  QRadioButton* radioButtonToClick1 =
+      (ui->widget->lineType) ? ui->radioButton_dashed : ui->radioButton_solid;
   radioButtonToClick1->blockSignals(true);
   radioButtonToClick1->click();
   radioButtonToClick1->blockSignals(false);
 
-  QRadioButton* radioButtonToClick2 = (ui->widget->perspective) ? ui->radioButton_central : ui->radioButton_parallel;
+  QRadioButton* radioButtonToClick2 = (ui->widget->perspective)
+                                          ? ui->radioButton_central
+                                          : ui->radioButton_parallel;
   radioButtonToClick2->blockSignals(true);
   radioButtonToClick2->click();
   radioButtonToClick2->blockSignals(false);
 
   QRadioButton* radioButtonToClick3 = nullptr;
-  if (ui->widget->pointType == 1)  radioButtonToClick3 = ui->radioButton_circle;
-  else if (ui->widget->pointType == 2)  radioButtonToClick3 = ui->radioButton_sqare;
-  else  radioButtonToClick3 = ui->radioButton_none;
+  if (ui->widget->pointType == 1)
+    radioButtonToClick3 = ui->radioButton_circle;
+  else if (ui->widget->pointType == 2)
+    radioButtonToClick3 = ui->radioButton_sqare;
+  else
+    radioButtonToClick3 = ui->radioButton_none;
 
   radioButtonToClick3->blockSignals(true);
   radioButtonToClick3->click();
@@ -279,9 +292,7 @@ void MainWindow::updateUI() {
   ui->widget->update();
 }
 
-void MainWindow::on_button_Undo_clicked() {
-  undoLastCommand();
-}
+void MainWindow::on_button_Undo_clicked() { undoLastCommand(); }
 
 void MainWindow::executeCommand(s21::ICommand* command) {
   if (command) {
@@ -299,4 +310,3 @@ void MainWindow::undoLastCommand() {
     delete command;
   }
 }
-
