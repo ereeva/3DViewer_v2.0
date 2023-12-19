@@ -15,6 +15,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    view/Commands.cc \
     controller/controller.cc \
     main.cc \
     model/3D_object.cc \
@@ -28,6 +29,8 @@ HEADERS += \
     controller/controller.h \
     model/3D_object.h \
     model/parser.h \
+    view/Commands.h \
+    view/ICommand.h \
     view/mainwindow.h \
     view/oglwidget.h
 

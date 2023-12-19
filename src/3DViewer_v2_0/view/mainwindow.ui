@@ -481,13 +481,13 @@ background-color: rgb(63, 114, 175);</string>
       <number>3</number>
      </property>
      <property name="minimum">
-      <double>0.001000000000000</double>
+      <double>0.010000000000000</double>
      </property>
      <property name="maximum">
       <double>20.000000000000000</double>
      </property>
      <property name="singleStep">
-      <double>0.001000000000000</double>
+      <double>0.010000000000000</double>
      </property>
      <property name="value">
       <double>1.000000000000000</double>
@@ -662,13 +662,13 @@ color: white
      <number>1</number>
     </property>
     <property name="maximum">
-     <number>20000</number>
+     <number>2000</number>
     </property>
     <property name="value">
-     <number>1000</number>
+     <number>100</number>
     </property>
     <property name="sliderPosition">
-     <number>1000</number>
+     <number>100</number>
     </property>
     <property name="tracking">
      <bool>true</bool>
@@ -1204,6 +1204,36 @@ QPushButton:pressed {
     </property>
     <property name="text">
      <string>JPG</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_Undo">
+    <property name="geometry">
+     <rect>
+      <x>1430</x>
+      <y>10</y>
+      <width>61</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    
+	font: 12pt &quot;Sans Serif&quot;;
+	color: white;
+    border-radius: 10px;
+	background-color: rgb(232, 162, 54);
+    border: none; 
+}
+
+QPushButton:pressed {
+    background-color: rgb(106, 106, 106);
+}</string>
+    </property>
+    <property name="text">
+     <string>Undo</string>
     </property>
    </widget>
   </widget>

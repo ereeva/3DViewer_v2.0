@@ -8,7 +8,7 @@ void MainWindow::SaveSettings() {
   settings_->setValue("background_color", ui->widget->backgroundColor);
   settings_->setValue("edge_color", ui->widget->lineColor);
   settings_->setValue("vertex_color", ui->widget->pointColor);
-
+  
   if (ui->radioButton_parallel->isChecked()) {
     settings_->setValue("projection_type", kParallel);
   } else {

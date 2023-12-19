@@ -1,22 +1,24 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <qgifglobal.h>
-#include <qgifimage.h>
-
 #include <QMainWindow>
 #include <QSettings>
 #include <QTimer>
+#include <qgifimage.h>
+#include <qgifglobal.h>
+#include <QStack>
 
-#include "controller/controller.h"
-#include "oglwidget.h"
 #include "ui_mainwindow.h"
+#include "controller/controller.h"
+#include "ICommand.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
 }
 QT_END_NAMESPACE
+
+class ICommand;
 
 class MainWindow : public QMainWindow {
   Q_OBJECT
@@ -88,6 +90,10 @@ class MainWindow : public QMainWindow {
 
   void RecordGif();
 
+  void updateUI();
+
+  void on_button_Undo_clicked();
+
  private:
   Ui::MainWindow *ui;
   s21::Controller *controller_;
@@ -109,5 +115,18 @@ class MainWindow : public QMainWindow {
   void SaveSettings();
   void RestoreSettings();
   void setStateAffinsUI(bool state);
+
+  // commands
+  s21::ICommand *solidLineCommand;
+  s21::ICommand *dashedLineCommand;
+  //s21::ICommand *setPointSizeCommand;
+
+  QStack<s21::ICommand*> commandStack_;
+ signals:
+  void commandExecuted();
+
+ public slots:
+  void executeCommand(s21::ICommand* command);
+  void undoLastCommand();
 };
 #endif  // MAINWINDOW_H

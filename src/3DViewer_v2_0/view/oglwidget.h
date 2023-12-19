@@ -24,6 +24,15 @@ class OGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
   bool perspective = false;
   QColor lineColor = QColor(0, 255, 0);
 
+  int FPS = 100;
+  double posX = 0.0;
+  double posY = 0.0;
+  double posZ = 0.0;
+  double scale = 1.0;
+  double rotX = 0.0;
+  double rotY = 0.0;
+  double rotZ = 0.0;
+
  protected:
   void initializeGL() override;
   void resizeGL(int w, int h) override;
@@ -37,40 +46,6 @@ class OGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
   void rotateObjectY(double y);
   void rotateObjectZ(double z);
   void scaleObject(double x);
-
-  // setters
-  void setBackgroudColor(QColor bgcolor) {
-    backgroundColor = bgcolor;
-    update();
-  }
-  void setLineType(bool type) {
-    lineType = type;
-    update();
-  }
-  void setLineSize(float size) {
-    lineSize = size;
-    update();
-  }
-  void setPointSize(float size) {
-    pointSize = size;
-    update();
-  }
-  void setPointType(int type) {
-    pointType = type;
-    update();
-  }
-  void setPointColor(QColor color) {
-    pointColor = color;
-    update();
-  }
-  void setPerspective(bool perspective) {
-    this->perspective = perspective;
-    update();
-  }
-  void setLineColor(QColor color) {
-    lineColor = color;
-    update();
-  }
 
  private:
   s21::Controller *data_ = nullptr;
