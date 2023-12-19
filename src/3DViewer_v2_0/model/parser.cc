@@ -7,10 +7,12 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <locale>
 
 namespace s21 {
 
 std::unique_ptr<Object> Parser::Parse(const std::string &file_name) {
+  setlocale(LC_ALL, "C");
   std::ifstream file(file_name);
   if (!file) throw std::runtime_error("file does not exist");
 
