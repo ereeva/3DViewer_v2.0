@@ -1,12 +1,12 @@
 #ifndef OGLWIDGET_H
 #define OGLWIDGET_H
 
-// #include <QObject>
 #include <QOpenGLFunctions>
 #include <QOpenGLWidget>
-// #include <QtOpenGLWidgets>
 
 #include "../controller/controller.h"
+
+namespace s21 {
 
 class OGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
   Q_OBJECT
@@ -54,5 +54,7 @@ class OGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
   void DrawVertices();
   void DrawEdges();
 };
+
+}  // namespace s21
 
 #endif  // OGLWIDGET_H

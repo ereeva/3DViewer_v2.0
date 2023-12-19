@@ -2,6 +2,8 @@
 
 #include "mainwindow.h"
 
+namespace s21 {
+
 void MainWindow::on_button_BPM_clicked() {
   QString path = QFileDialog::getSaveFileName(this, ("Save as BMP"),
                                               "image.bmp", "BMP (*.bmp)");
@@ -42,3 +44,5 @@ void MainWindow::RecordGif() {
     count = 0;
   }
 }
+
+}  // namespace s21

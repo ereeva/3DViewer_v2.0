@@ -11,7 +11,7 @@
 #include "Commands.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget* parent)
+s21::MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
       controller_(&s21::Controller::getInstance()),
@@ -23,13 +23,13 @@ MainWindow::MainWindow(QWidget* parent)
   connect(this, SIGNAL(commandExecuted()), this, SLOT(updateUI()));
 }
 
-MainWindow::~MainWindow() {
+s21::MainWindow::~MainWindow() {
   SaveSettings();
   delete settings_;
   delete ui;
 }
 
-void MainWindow::on_button_selectFile_clicked() {
+void s21::MainWindow::on_button_selectFile_clicked() {
   ClearControls();
   QString fileName = QFileDialog::getOpenFileName(
       this, tr("Select a file"), QDir::homePath(), "Obj files (*.obj)");
@@ -52,7 +52,7 @@ void MainWindow::on_button_selectFile_clicked() {
   setStateAffinsUI(false);
 }
 
-void MainWindow::setStateAffinsUI(bool state) {
+void s21::MainWindow::setStateAffinsUI(bool state) {
   ui->spinBox_moveX->setDisabled(state);
   ui->spinBox_moveY->setDisabled(state);
   ui->spinBox_moveZ->setDisabled(state);
@@ -73,72 +73,72 @@ void MainWindow::setStateAffinsUI(bool state) {
 //
 // Start transformations
 //
-void MainWindow::on_Slider_moveX_valueChanged(int value) {
+void s21::MainWindow::on_Slider_moveX_valueChanged(int value) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::translateObjectXCommand(ui, (double)value)));
 }
 
-void MainWindow::on_Slider_moveY_valueChanged(int value) {
+void s21::MainWindow::on_Slider_moveY_valueChanged(int value) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::translateObjectYCommand(ui, (double)value)));
 }
 
-void MainWindow::on_Slider_moveZ_valueChanged(int value) {
+void s21::MainWindow::on_Slider_moveZ_valueChanged(int value) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::translateObjectZCommand(ui, (double)value)));
 }
 
-void MainWindow::on_Slider_rotateX_valueChanged(int value) {
+void s21::MainWindow::on_Slider_rotateX_valueChanged(int value) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::rotateObjectXCommand(ui, (double)value)));
 }
 
-void MainWindow::on_Slider_rotateY_valueChanged(int value) {
+void s21::MainWindow::on_Slider_rotateY_valueChanged(int value) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::rotateObjectYCommand(ui, (double)value)));
 }
 
-void MainWindow::on_Slider_rotateZ_valueChanged(int value) {
+void s21::MainWindow::on_Slider_rotateZ_valueChanged(int value) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::rotateObjectZCommand(ui, (double)value)));
 }
 
-void MainWindow::on_Slider_scale_valueChanged(int value) {
+void s21::MainWindow::on_Slider_scale_valueChanged(int value) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::scaleObjectCommand(ui, (double)value)));
 }
 
-void MainWindow::on_doubleSpinBox_scale_valueChanged(double arg1) {
+void s21::MainWindow::on_doubleSpinBox_scale_valueChanged(double arg1) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::scaleObjectCommand(ui, arg1 * ui->widget->FPS)));
 }
 
-void MainWindow::on_spinBox_moveX_valueChanged(int arg1) {
+void s21::MainWindow::on_spinBox_moveX_valueChanged(int arg1) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::translateObjectXCommand(ui, (double)arg1)));
 }
 
-void MainWindow::on_spinBox_moveY_valueChanged(int arg1) {
+void s21::MainWindow::on_spinBox_moveY_valueChanged(int arg1) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::translateObjectYCommand(ui, (double)arg1)));
 }
 
-void MainWindow::on_spinBox_moveZ_valueChanged(int arg1) {
+void s21::MainWindow::on_spinBox_moveZ_valueChanged(int arg1) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::translateObjectZCommand(ui, (double)arg1)));
 }
 
-void MainWindow::on_spinBox_rotateX_valueChanged(int arg1) {
+void s21::MainWindow::on_spinBox_rotateX_valueChanged(int arg1) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::rotateObjectXCommand(ui, (double)arg1)));
 }
 
-void MainWindow::on_spinBox_rotateY_valueChanged(int arg1) {
+void s21::MainWindow::on_spinBox_rotateY_valueChanged(int arg1) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::rotateObjectYCommand(ui, (double)arg1)));
 }
 
-void MainWindow::on_spinBox_rotateZ_valueChanged(int arg1) {
+void s21::MainWindow::on_spinBox_rotateZ_valueChanged(int arg1) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::rotateObjectZCommand(ui, (double)arg1)));
 }
@@ -150,64 +150,64 @@ void MainWindow::on_spinBox_rotateZ_valueChanged(int arg1) {
 // Start styles
 //
 
-void MainWindow::on_Slider_lineSize_valueChanged(int value) {
+void s21::MainWindow::on_Slider_lineSize_valueChanged(int value) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::SetLineSizeCommand(ui, (float)value)));
 }
 
-void MainWindow::on_Slider_pointSize_valueChanged(int value) {
+void s21::MainWindow::on_Slider_pointSize_valueChanged(int value) {
   executeCommand(dynamic_cast<s21::ICommand*>(
       new s21::SetPointSizeCommand(ui, (float)value)));
 }
 
-void MainWindow::on_radioButton_solid_clicked() {
+void s21::MainWindow::on_radioButton_solid_clicked() {
   executeCommand(
       dynamic_cast<s21::ICommand*>(new s21::SetLineTypeCommand(ui, false)));
 }
 
-void MainWindow::on_radioButton_dashed_clicked() {
+void s21::MainWindow::on_radioButton_dashed_clicked() {
   executeCommand(
       dynamic_cast<s21::ICommand*>(new s21::SetLineTypeCommand(ui, true)));
 }
 
-void MainWindow::on_radioButton_parallel_clicked() {
+void s21::MainWindow::on_radioButton_parallel_clicked() {
   executeCommand(
       dynamic_cast<s21::ICommand*>(new s21::SetPerspectiveCommand(ui, false)));
 }
 
-void MainWindow::on_radioButton_central_clicked() {
+void s21::MainWindow::on_radioButton_central_clicked() {
   executeCommand(
       dynamic_cast<s21::ICommand*>(new s21::SetPerspectiveCommand(ui, true)));
 }
 
-void MainWindow::on_radioButton_none_clicked() {
+void s21::MainWindow::on_radioButton_none_clicked() {
   executeCommand(
       dynamic_cast<s21::ICommand*>(new s21::SetPointTypeCommand(ui, 0)));
 }
 
-void MainWindow::on_radioButton_circle_clicked() {
+void s21::MainWindow::on_radioButton_circle_clicked() {
   executeCommand(
       dynamic_cast<s21::ICommand*>(new s21::SetPointTypeCommand(ui, 1)));
 }
 
-void MainWindow::on_radioButton_sqare_clicked() {
+void s21::MainWindow::on_radioButton_sqare_clicked() {
   executeCommand(
       dynamic_cast<s21::ICommand*>(new s21::SetPointTypeCommand(ui, 2)));
 }
 
-void MainWindow::on_button_BG_color_clicked() {
+void s21::MainWindow::on_button_BG_color_clicked() {
   executeCommand(
       dynamic_cast<s21::ICommand*>(new s21::SetBackgroundColorCommand(
           ui,
           QColorDialog::getColor(Qt::white, this, "Choose background color"))));
 }
 
-void MainWindow::on_button_line_color_clicked() {
+void s21::MainWindow::on_button_line_color_clicked() {
   executeCommand(dynamic_cast<s21::ICommand*>(new s21::SetLineColorCommand(
       ui, QColorDialog::getColor(Qt::white, this, "Choose line color"))));
 }
 
-void MainWindow::on_button_point_color_clicked() {
+void s21::MainWindow::on_button_point_color_clicked() {
   executeCommand(dynamic_cast<s21::ICommand*>(new s21::SetPointColorCommand(
       ui, QColorDialog::getColor(Qt::white, this, "Choose point color"))));
 }
@@ -215,7 +215,7 @@ void MainWindow::on_button_point_color_clicked() {
 // End styles
 //
 
-void MainWindow::updateUI() {
+void s21::MainWindow::updateUI() {
   QSignalBlocker blocker1(ui->spinBox_moveX);
   QSignalBlocker blocker2(ui->Slider_moveX);
   double posX = ui->widget->posX * ui->widget->FPS;
@@ -293,9 +293,9 @@ void MainWindow::updateUI() {
   ui->widget->update();
 }
 
-void MainWindow::on_button_Undo_clicked() { undoLastCommand(); }
+void s21::MainWindow::on_button_Undo_clicked() { undoLastCommand(); }
 
-void MainWindow::executeCommand(s21::ICommand* command) {
+void s21::MainWindow::executeCommand(s21::ICommand* command) {
   if (command) {
     commandStack_.push(command);
     command->execute();
@@ -303,7 +303,7 @@ void MainWindow::executeCommand(s21::ICommand* command) {
   }
 }
 
-void MainWindow::undoLastCommand() {
+void s21::MainWindow::undoLastCommand() {
   if (!commandStack_.isEmpty()) {
     s21::ICommand* command = commandStack_.pop();
     command->undo();
@@ -312,7 +312,7 @@ void MainWindow::undoLastCommand() {
   }
 }
 
-void MainWindow::ClearControls() {
+void s21::MainWindow::ClearControls() {
   ui->Slider_moveX->setValue(0);
   ui->Slider_moveY->setValue(0);
   ui->Slider_moveZ->setValue(0);

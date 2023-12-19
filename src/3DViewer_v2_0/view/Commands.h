@@ -8,6 +8,7 @@
 #include "ui_mainwindow.h"
 
 namespace s21 {
+
 class SetPointSizeCommand : public ICommand {
  private:
   Ui::MainWindow *ui_;
@@ -306,6 +307,7 @@ class scaleObjectCommand : public ICommand {
 
 //    void updateUI() override;
 //  };
+
 }  // namespace s21
 
 #endif  // COMMANDS_H

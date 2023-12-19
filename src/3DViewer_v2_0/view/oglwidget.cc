@@ -1,15 +1,15 @@
 #define GL_SILENCE_DEPRECATION
 #include "oglwidget.h"
 
-OGLWidget::OGLWidget(QWidget *parent) : QOpenGLWidget{parent} {}
-void OGLWidget::initializeGL() {
+s21::OGLWidget::OGLWidget(QWidget *parent) : QOpenGLWidget{parent} {}
+void s21::OGLWidget::initializeGL() {
   initializeOpenGLFunctions();
   glEnable(GL_DEPTH_TEST);
 }
 
-void OGLWidget::resizeGL(int w, int h) { glViewport(0, 0, w, h); }
+void s21::OGLWidget::resizeGL(int w, int h) { glViewport(0, 0, w, h); }
 
-void OGLWidget::paintGL() {
+void s21::OGLWidget::paintGL() {
   glClearColor(backgroundColor.redF(), backgroundColor.greenF(),
                backgroundColor.blueF(), 1);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -29,7 +29,7 @@ void OGLWidget::paintGL() {
   }
 }
 
-void OGLWidget::SetProjectionType() const {
+void s21::OGLWidget::SetProjectionType() const {
   if (perspective) {
     glFrustum(-0.8, 0.8, -0.6, 0.6, 1, 100);
     glTranslatef(0, 0, -3);
@@ -37,7 +37,7 @@ void OGLWidget::SetProjectionType() const {
     glOrtho(-1, 1, -0.75, 0.75, -100, 100);
 }
 
-void OGLWidget::DrawVertices() {
+void s21::OGLWidget::DrawVertices() {
   if (pointType != 0) {
     if (pointType == 1) {
       glEnable(GL_POINT_SMOOTH);
@@ -51,7 +51,7 @@ void OGLWidget::DrawVertices() {
   }
 }
 
-void OGLWidget::DrawEdges() {
+void s21::OGLWidget::DrawEdges() {
   if (lineType) {
     glEnable(GL_LINE_STIPPLE);
     glLineStipple(1, 0x0101);
@@ -65,21 +65,21 @@ void OGLWidget::DrawEdges() {
                  data_->FaceIndices());
 }
 
-void OGLWidget::allocate(s21::Controller *&controller) {
+void s21::OGLWidget::allocate(s21::Controller *&controller) {
   data_ = controller;
   update();
 }
 
-void OGLWidget::translateObject(double x, double y, double z) {
+void s21::OGLWidget::translateObject(double x, double y, double z) {
   data_->TranslateObject(x, s21::X);
   data_->TranslateObject(y, s21::Y);
   data_->TranslateObject(z, s21::Z);
 }
 
-void OGLWidget::rotateObjectX(double x) { data_->RotateObject(x, s21::X); }
+void s21::OGLWidget::rotateObjectX(double x) { data_->RotateObject(x, s21::X); }
 
-void OGLWidget::rotateObjectY(double y) { data_->RotateObject(y, s21::Y); }
+void s21::OGLWidget::rotateObjectY(double y) { data_->RotateObject(y, s21::Y); }
 
-void OGLWidget::rotateObjectZ(double z) { data_->RotateObject(z, s21::Z); }
+void s21::OGLWidget::rotateObjectZ(double z) { data_->RotateObject(z, s21::Z); }
 
-void OGLWidget::scaleObject(double x) { data_->ScaleObject(x); }
+void s21::OGLWidget::scaleObject(double x) { data_->ScaleObject(x); }

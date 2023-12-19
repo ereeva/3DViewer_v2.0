@@ -13,11 +13,11 @@
 #include "controller/controller.h"
 #include "ui_mainwindow.h"
 
-QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
 }
-QT_END_NAMESPACE
+
+namespace s21 {
 
 class ICommand;
 
@@ -131,4 +131,7 @@ class MainWindow : public QMainWindow {
   void executeCommand(s21::ICommand *command);
   void undoLastCommand();
 };
+
+}  // namespace s21
+
 #endif  // MAINWINDOW_H

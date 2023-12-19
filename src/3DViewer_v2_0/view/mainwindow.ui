@@ -582,7 +582,7 @@ color: white
      <string>Background</string>
     </property>
    </widget>
-   <widget class="OGLWidget" name="widget" native="true">
+   <widget class="s21::OGLWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -1240,7 +1240,7 @@ QPushButton:pressed {
  </widget>
  <customwidgets>
   <customwidget>
-   <class>OGLWidget</class>
+   <class>s21::OGLWidget</class>
    <extends>QWidget</extends>
    <header>view/oglwidget.h</header>
    <container>1</container>

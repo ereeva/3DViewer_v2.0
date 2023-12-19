@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 
+namespace s21 {
+
 enum ProjectionType { kParallel, kCentral };
 enum EdgeType { kSolid, kDashed };
 enum VertexType { kNone, kCircle, kSquare };
@@ -71,3 +73,5 @@ void MainWindow::RestoreSettings() {
     ui->widget->pointType = 0;
   }
 }
+
+}  // namespace s21
