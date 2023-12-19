@@ -14,10 +14,12 @@ CLANG_FILES=$(shell find $(PROJECT_NAME) \( -name "*.cc" -o -name "*.h" \))
 
 OS := $(shell uname -s)
 ifeq ($(OS), Linux)
-	OPEN_CMD=./$(INSTALL_DIR)/$(PROJECT_NAME)
+	PROGRAM=$(PROJECT_NAME)
+	OPEN_CMD=
 endif
 ifeq ($(OS), Darwin)
-	OPEN_CMD=open ./$(INSTALL_DIR)/$(PROJECT_NAME).app
+	PROGRAM=$(PROJECT_NAME).app
+	OPEN_CMD=open
 endif
 
 .PHONY: all $(TEST) $(TEST_BUILD) build install uninstall open gcov_report dvi dist clean clang style valgrind leaks
@@ -36,7 +38,7 @@ uninstall: clean
 	rm -rf $(INSTALL_DIR)
 
 open:
-	$(OPEN_CMD)
+	$(OPEN_CMD) ./$(INSTALL_DIR)/$(PROGRAM)
 
 $(TEST): $(TEST_BUILD)
 	./$(TEST)
