@@ -30,8 +30,9 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::on_button_selectFile_clicked() {
-  QString fileName = QFileDialog::getOpenFileName(this, tr("Select a file"),
-                                                  QDir::homePath(), tr(""));
+  ClearControls();
+  QString fileName = QFileDialog::getOpenFileName(
+      this, tr("Select a file"), QDir::homePath(), "Obj files (*.obj)");
 
   std::string str = fileName.toStdString();
   try {
@@ -309,4 +310,16 @@ void MainWindow::undoLastCommand() {
     emit commandExecuted();
     delete command;
   }
+}
+
+void MainWindow::ClearControls() {
+  ui->Slider_moveX->setValue(0);
+  ui->Slider_moveY->setValue(0);
+  ui->Slider_moveZ->setValue(0);
+
+  ui->Slider_rotateX->setValue(0);
+  ui->Slider_rotateY->setValue(0);
+  ui->Slider_rotateZ->setValue(0);
+
+  ui->Slider_scale->setValue(100);
 }

@@ -116,6 +116,7 @@ class MainWindow : public QMainWindow {
   void SaveSettings();
   void RestoreSettings();
   void setStateAffinsUI(bool state);
+  void ClearControls();
 
   // commands
   s21::ICommand *solidLineCommand;
