@@ -30,16 +30,16 @@ s21::MainWindow::~MainWindow() {
 }
 
 void s21::MainWindow::on_button_selectFile_clicked() {
-  ClearControls();
   QString fileName = QFileDialog::getOpenFileName(
       this, tr("Select a file"), "~/", tr("Obj files (*.obj)"));
 
   std::string str = fileName.toStdString();
   try {
+    ClearControls();
     controller_->LoadObject(str);
   } catch (...) {
     ui->label_fileName->setText("error path or file");
-    setStateAffinsUI(true);
+    // setStateAffinsUI(true);
     return;
   }
 
