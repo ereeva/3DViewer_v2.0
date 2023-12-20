@@ -28,7 +28,7 @@ all: install
 
 build:
 	mkdir -p $(BUILD_DIR)
-	cd $(BUILD_DIR) && qmake ../$(PROJECT_NAME)/ && make
+	cd $(BUILD_DIR) && qmake6 ../$(PROJECT_NAME)/ && make
 
 install: build
 	mkdir -p $(INSTALL_DIR)
@@ -63,7 +63,8 @@ dvi:
 	$(OPEN) ./documentation/html/index.html
 
 clean:
-	rm -rf $(BUILD_DIR) $(TEST) documentation
+	rm -rf $(BUILD_DIR) $(TEST) documentation *.out *.o *.gcda *.gcno *.info $(PROJECT_NAME).tgz
+	rm -rf report/ $(INSTALL_DIR)
 
 style:
 	clang-format -n --style=Google $(CLANG_FILES)
