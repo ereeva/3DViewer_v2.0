@@ -28,7 +28,7 @@ all: install
 
 build:
 	mkdir -p $(BUILD_DIR)
-	cd $(BUILD_DIR) && qmake6 ../$(PROJECT_NAME)/ && make
+	cd $(BUILD_DIR) && qmake ../$(PROJECT_NAME)/ && make
 
 install: build
 	mkdir -p $(INSTALL_DIR)
