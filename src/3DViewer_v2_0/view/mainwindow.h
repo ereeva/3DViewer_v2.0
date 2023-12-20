@@ -113,22 +113,30 @@ class MainWindow : public QMainWindow {
   double rotY = 0.0;
   double rotZ = 0.0;
 
+  /// @brief сохранение настроек стилей
   void SaveSettings();
+
+  /// @brief восстановление настроек стилей
   void RestoreSettings();
+
+  /// @brief заблокировать ui элементы преобразований
+  /// @param заблокировать/разблокировать
   void setStateAffinsUI(bool state);
+
+  /// @brief сбросить ui элементы до default
   void ClearControls();
 
-  // commands
-  s21::ICommand *solidLineCommand;
-  s21::ICommand *dashedLineCommand;
-  // s21::ICommand *setPointSizeCommand;
-
+  /// @brief стек для хранения выполненных комад, для возможности их отмены
   QStack<s21::ICommand *> commandStack_;
  signals:
   void commandExecuted();
 
  public slots:
+  /// @brief переопределенная функция вызова команд
+  /// @param класс команды, преобразованный до интерфейса ICommand и выполнить метод execute()
   void executeCommand(s21::ICommand *command);
+
+  /// @brief достать из стека последнюю выполненную команду и выполнить ее метод undo()
   void undoLastCommand();
 };
 

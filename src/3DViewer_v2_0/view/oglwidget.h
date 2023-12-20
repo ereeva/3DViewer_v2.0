@@ -38,20 +38,42 @@ class OGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
   void resizeGL(int w, int h) override;
 
  public slots:
+
+  /// @brief получение контроллера
+  /// @param контроллер
   void allocate(s21::Controller *&controller);
 
   // affins
+  /// @brief движение объекта
+  /// @param ось X, ось Y, ось Z
   void translateObject(double x, double y, double z);
+
+  /// @brief поворот объекта по оси X
+  /// @param угол
   void rotateObjectX(double x);
+
+  /// @brief поворот объекта по оси Y
+  /// @param угол
   void rotateObjectY(double y);
+
+  /// @brief поворот объекта по оси Z
+  /// @param угол
   void rotateObjectZ(double z);
+
+  /// @brief увеличение/уменьшение объекта
+  /// @param параметр скейлинга
   void scaleObject(double x);
 
  private:
   s21::Controller *data_ = nullptr;
 
+  /// @brief задать проекцию
   void SetProjectionType() const;
+
+  /// @brief отрисовка линий
   void DrawVertices();
+
+  /// @brief отрисовка точек
   void DrawEdges();
 };
 

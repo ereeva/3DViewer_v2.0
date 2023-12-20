@@ -5,8 +5,14 @@ namespace s21 {
 
 class ICommand {
  public:
+
+  /// @brief интерфейс для реализации конструктора команды
   virtual ~ICommand() = default;
+
+  /// @brief интерфейс для реализации выполнения команды
   virtual void execute() = 0;
+
+  /// @brief интерфейс для реализации отмены команды
   virtual void undo() = 0;
 };
 
