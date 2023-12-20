@@ -152,10 +152,6 @@ class translateObjectXCommand : public ICommand {
     ui_->widget->posX = oldValue_;
     ui_->widget->translateObject(result, 0, 0);
   }
-
-  //    virtual double getCurrentValue() const = 0;
-  //    virtual void transformObject(double result) = 0;
-  //    virtual void updateUI();
 };
 
 class translateObjectYCommand : public ICommand {
@@ -295,18 +291,6 @@ class scaleObjectCommand : public ICommand {
     ui_->widget->scaleObject(result);
   }
 };
-
-//  class translateObjectXCommand : public translateObjectCommand {
-
-//   public:
-//    translateObjectXCommand(Ui::MainWindow *ui, double x);
-
-//    void transformObject(double result) override;
-
-//    double getCurrentValue() const override;
-
-//    void updateUI() override;
-//  };
 
 }  // namespace s21
 

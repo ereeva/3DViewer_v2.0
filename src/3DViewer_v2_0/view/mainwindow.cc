@@ -39,7 +39,6 @@ void s21::MainWindow::on_button_selectFile_clicked() {
     controller_->LoadObject(str);
   } catch (...) {
     ui->label_fileName->setText("error path or file");
-    // setStateAffinsUI(true);
     return;
   }
 
