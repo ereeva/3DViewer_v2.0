@@ -60,7 +60,7 @@ dist:
 
 dvi:
 	doxygen Doxyfile
-	$(OPEN) ./documentation/html/index.html
+	open ./documentation/html/index.html
 
 clean:
 	rm -rf $(BUILD_DIR) $(TEST) documentation *.out *.o *.gcda *.gcno *.info $(PROJECT_NAME).tgz
