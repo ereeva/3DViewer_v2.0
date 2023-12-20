@@ -5,7 +5,6 @@ namespace s21 {
 
 class ICommand {
  public:
-
   /// @brief интерфейс для реализации конструктора команды
   virtual ~ICommand() = default;
 

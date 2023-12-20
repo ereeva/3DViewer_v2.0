@@ -4,10 +4,10 @@
 #include <cmath>
 #include <fstream>
 #include <limits>
+#include <locale>
 #include <memory>
 #include <string>
 #include <vector>
-#include <locale>
 
 namespace s21 {
 

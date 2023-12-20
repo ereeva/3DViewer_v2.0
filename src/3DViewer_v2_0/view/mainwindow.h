@@ -133,10 +133,12 @@ class MainWindow : public QMainWindow {
 
  public slots:
   /// @brief переопределенная функция вызова команд
-  /// @param класс команды, преобразованный до интерфейса ICommand и выполнить метод execute()
+  /// @param класс команды, преобразованный до интерфейса ICommand и выполнить
+  /// метод execute()
   void executeCommand(s21::ICommand *command);
 
-  /// @brief достать из стека последнюю выполненную команду и выполнить ее метод undo()
+  /// @brief достать из стека последнюю выполненную команду и выполнить ее метод
+  /// undo()
   void undoLastCommand();
 };
 
